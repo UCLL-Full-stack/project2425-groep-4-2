@@ -22,12 +22,15 @@ type ReviewerInput = {
 
 type ConsoleInput = {
     id?: number;
+    price: number;
     name: string;
     version: string;
     brand: string;
+    releaseDate: string;
 };
 
 export {
+    UserInput,
     Role,
     NormalInput,
     ManagerInput,

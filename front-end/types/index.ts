@@ -10,7 +10,9 @@ export type User = {
 
 export type Console = {
   id?: number;
+  price?: number;
   name: string;
   version: string;
   brand: string;
+  releaseDate: string;
   };

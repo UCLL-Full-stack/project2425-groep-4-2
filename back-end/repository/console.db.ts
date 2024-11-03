@@ -35,6 +35,7 @@ const allGames = [
 
 const consoleOne = new Console({
     id: 1,
+    price: 500,
     name: "Playstation",
     version: "4 pro",
     releaseDate: new Date(2021, 11, 17),
@@ -44,6 +45,7 @@ const consoleOne = new Console({
 
 const consoleTwo = new Console({
     id: 2,
+    price: 600,
     name: "X box",
     version: "One X",
     releaseDate: new Date(2021, 11, 17),

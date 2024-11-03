@@ -12,12 +12,17 @@ const getConsoleById = (id: number): Console => {
 
 const addConsole = async ({
     id,
+    price,
     name,
     version,
     brand,
+    releaseDate: releaseDateString,
 }: ConsoleInput): Promise<Console> => {
     if (!id) {
         throw new Error('Id is required.');
+    }
+    if (!price) {
+        throw new Error('Price is required.');
     }
     if (!name) {
         throw new Error('Name is required.');
@@ -28,8 +33,14 @@ const addConsole = async ({
     if (!brand){
         throw new Error('Brand is required.');
     }
+    if (!releaseDateString){
+        throw new Error('Release date is required.');
+    }
 
-    const console = new Console({id, name, version, releaseDate: new Date(2021, 11, 17), brand, games : []})
+    const dateNumber = Date.parse(releaseDateString);
+    const releaseDate = new Date(dateNumber);
+
+    const console = new Console({id, price, name, version, releaseDate, brand, games : []})
     return await consoleDb.addConsole(console);
 }
 

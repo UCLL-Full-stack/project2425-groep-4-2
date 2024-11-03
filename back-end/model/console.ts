@@ -2,6 +2,7 @@ import { Game } from "./game";
 
 export class Console {
     private id?: number;
+    private price: number;
     private name: string;
     private version: string;
     private releaseDate: Date;
@@ -10,6 +11,7 @@ export class Console {
 
     constructor(console: {
         id?: number;
+        price: number
         name: string;
         version: string;
         releaseDate: Date;
@@ -17,6 +19,7 @@ export class Console {
         games: Game[];
     }) {
         this.id = console.id;
+        this.price = console.price;
         this.name = console.name;
         this.version = console.version;
         this.releaseDate = console.releaseDate;
@@ -26,6 +29,10 @@ export class Console {
 
     getId() : number | undefined{
         return this.id;
+    }
+
+    getPrice() : number{
+        return this.price;
     }
 
     getName() : string{

@@ -14,18 +14,27 @@ const ConsoleOverview: React.FC<Props> = ({ consoles }: Props) => {
           <thead>
             <tr>
               <th scope="col">Id</th>
+              <th scope="col">Price</th>
               <th scope="col">Name</th>
               <th scope="col">Version</th>
               <th scope="col">Brand</th>
+              <th scope="col">Release date</th>
             </tr>
           </thead>
           <tbody>
             {consoles.map((console, index) => (
               <tr key={index}>
                 <td>{console.id}</td>
+                <td>{console.price}</td>
                 <td>{console.name}</td>
                 <td>{console.version}</td>
                 <td>{console.brand}</td>
+                <td>
+                  {console.releaseDate.substring(8, 10)}
+                  {console.releaseDate.substring(4, 8)}
+                  {console.releaseDate.substring(0, 4)}
+                  
+                </td>
               </tr>
             ))}
           </tbody>
