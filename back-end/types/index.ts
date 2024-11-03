@@ -20,9 +20,17 @@ type ReviewerInput = {
     
 };
 
-export{
+type ConsoleInput = {
+    id?: number;
+    name: string;
+    version: string;
+    brand: string;
+};
+
+export {
     Role,
     NormalInput,
     ManagerInput,
-    ReviewerInput,
+    ReviewerInput, 
+    ConsoleInput,
 };

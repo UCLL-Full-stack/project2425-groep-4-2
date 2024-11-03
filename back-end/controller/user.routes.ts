@@ -15,10 +15,16 @@
  *              format: int64
  *            name:
  *              type: string
- *              description: Lecturer name.
- *            expertise:
+ *              description: User name.
+ *            email:
  *              type: string
- *              description: Lecturer expertise.
+ *              description: User email.
+ *            dateOfBirth:
+ *              type: string
+ *              description: Date of birth of the user.
+ *            role:
+ *              type: string
+ *              description: Role of the user.
  */
 import express, { NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
@@ -27,18 +33,18 @@ const userRouter = express.Router();
 
 /**
  * @swagger
- * /lecturers:
+ * /users:
  *   get:
- *     summary: Get a list of all lecturers.
+ *     summary: Get a list of all users.
  *     responses:
  *       200:
- *         description: A list of lecturers.
+ *         description: A list of users.
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/Lecturer'
+ *                  $ref: '#/components/schemas/User'
  */
 userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -51,23 +57,23 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 /**
  * @swagger
- * /lecturers/{id}:
+ * /users/{id}:
  *  get:
- *      summary: Get a lecturer by id.
+ *      summary: Get a user by id.
  *      parameters:
  *          - in: path
  *            name: id
  *            schema:
  *              type: integer
  *              required: true
- *              description: The lecturer id.
+ *              description: The user id.
  *      responses:
  *          200:
- *              description: A lecturer object.
+ *              description: A user object.
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/Lecturer'
+ *                          $ref: '#/components/schemas/User'
  */
 userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {

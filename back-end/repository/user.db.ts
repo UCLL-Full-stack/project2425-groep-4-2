@@ -5,27 +5,27 @@ import { User } from '../model/user';
 
 const gameOne = new Game({
     id: 1, 
-    name: "Stardoom valley", 
-    genre: "Souls like", 
+    name: "Stardew valley", 
+    genre: "Relax", 
     releaseDate: new Date(2021, 11, 17), 
-    developer: "Nick", 
+    developer: "Harry", 
     consoles: []
 });
 
 const gameTwo = new Game({
-    id: 2, name: "The legend of honda", 
-    genre: "Open world racing", 
+    id: 2, name: "The legend of zelda BOTW", 
+    genre: "Open world", 
     releaseDate: new Date(2021, 11, 17), 
-    developer: "Nick2", 
+    developer: "Harry", 
     consoles: []
 })
 
 const gameThree = new Game({
     id: 3, 
-    name: "Starduck crusaders", 
-    genre: "Beat em up", 
+    name: "Dark Souls", 
+    genre: "Soulslike", 
     releaseDate: new Date(2021, 11, 17), 
-    developer: "Nick3", 
+    developer: "Not Harry", 
     consoles: []
 })
 
@@ -38,21 +38,21 @@ const allGames = [
 const reviewOne = new Review({
     id: 1,
     stars: 5,
-    description: 'Game where start falls to doomfish',
+    description: 'Very relaxing game',
     game: gameOne,
 })
 
 const reviewTwo = new Review({
     id: 2,
-    stars: 3,
-    description: 'I do no know what this is about',
+    stars: 4,
+    description: 'Nice scenery',
     game: gameTwo,
 })
 
 const reviewThree = new Review({
     id: 3,
     stars: 3,
-    description: 'Ducks fighting with ghosts',
+    description: 'Very difficult game',
     game: gameThree
 })
 
@@ -67,19 +67,19 @@ const reviewsUserTwo = [
 
 const consoleOne = new Console({
     id: 1,
-    name: "Slaystation",
-    version: "9 pro",
+    name: "Playstation",
+    version: "4 pro",
     releaseDate: new Date(2021, 11, 17),
-    brand: "Bony",
+    brand: "Sony",
     games: [gameOne],
 })
 
 const consoleTwo = new Console({
     id: 2,
-    name: "Susbox",
-    version: "Two X",
+    name: "X box",
+    version: "One X",
     releaseDate: new Date(2021, 11, 17),
-    brand: "GigaHard",
+    brand: "Microsoft",
     games: allGames,
 })
 
@@ -98,7 +98,7 @@ const users = [
     new User({
         id: 1,
         name: "Harry",
-        email: "barry@toverstok.gg",
+        email: "harry@outlook.com",
         dateOfBirth: new Date(2021, 11, 17),
         role: "normal",
         consoles: consolesUserOne,
@@ -107,8 +107,8 @@ const users = [
     }),
     new User({
         id: 2,
-        name: "Henry",
-        email: "joe@toverstok.gg",
+        name: "Not Harry",
+        email: "notharry@gmail.com",
         dateOfBirth: new Date(2021, 11, 17),
         role: "normal",
         consoles: consolesUserTwo,
