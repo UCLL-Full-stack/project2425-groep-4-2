@@ -1,6 +1,15 @@
 import { Console } from '../model/console';
 import { Game } from '../model/game';
 
+/*
+let idSequenceConsole : 0;
+
+let getNextIdConsole = (): number => {
+    idSequenceConsole += 1;
+    return idSequenceConsole;
+}
+*/
+
 const gameOne = new Game({
     id: 1, 
     name: "Stardew valley", 
@@ -34,6 +43,7 @@ const allGames = [
 ]
 
 const consoleOne = new Console({
+    //id: getNextIdConsole(),
     id: 1,
     price: 500,
     name: "Playstation",
@@ -44,6 +54,7 @@ const consoleOne = new Console({
 })
 
 const consoleTwo = new Console({
+    //id: getNextIdConsole(),
     id: 2,
     price: 600,
     name: "X box",
@@ -71,6 +82,7 @@ const addConsole = (console : Console) : Console => {
 }
 
 export default {
+    //getNextIdConsole,
     getAllConsoles,
     getConsoleById,
     addConsole, 

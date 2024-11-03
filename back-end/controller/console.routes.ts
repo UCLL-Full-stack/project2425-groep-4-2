@@ -13,6 +13,9 @@
  *            id:
  *              type: number
  *              format: int64
+ *            price:
+ *              type: number
+ *              format: int64
  *            name:
  *              type: string
  *              description: Console name.
@@ -22,6 +25,9 @@
  *             brand:
  *              type: string
  *              description: Console brand.
+ *             releaseDate:
+ *              type: string
+ *              description: Console release date.
  */
 import express, { NextFunction, Request, Response } from 'express';
 import consoleService from '../service/console.service';

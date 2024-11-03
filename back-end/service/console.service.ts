@@ -11,6 +11,7 @@ const getConsoleById = (id: number): Console => {
 };
 
 const addConsole = async ({
+    //id: inputId,
     id,
     price,
     name,
@@ -18,8 +19,12 @@ const addConsole = async ({
     brand,
     releaseDate: releaseDateString,
 }: ConsoleInput): Promise<Console> => {
+    //let id;
     if (!id) {
         throw new Error('Id is required.');
+        //id = consoleDb.getNextIdConsole();
+    // }else{
+    //     id = inputId;
     }
     if (!price) {
         throw new Error('Price is required.');
