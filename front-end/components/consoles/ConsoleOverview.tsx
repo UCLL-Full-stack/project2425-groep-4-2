@@ -1,12 +1,14 @@
 import { Console } from '@/types';
 import React from 'react';
 import AddConsole from './AddConsole';
+import ConsoleService from '@/services/ConsoleService';
 
 type Props = {
   consoles: Array<Console>;
+  onDeleteConsole: (console: Console) => void;
 };
 
-const ConsoleOverview: React.FC<Props> = ({ consoles }: Props) => {
+const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) => {
   return (
     <>
       {consoles && (
@@ -35,6 +37,11 @@ const ConsoleOverview: React.FC<Props> = ({ consoles }: Props) => {
                   {console.releaseDate.substring(0, 4)}
                   
                 </td>
+                <td
+                    onClick={() => onDeleteConsole(console)}
+                  >
+                    <p>Delete</p>
+                  </td>
               </tr>
             ))}
           </tbody>

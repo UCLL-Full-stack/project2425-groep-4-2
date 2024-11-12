@@ -14,6 +14,13 @@ const Consoles: React.FC = () => {
         setConsoles(json);
     };
 
+    const handleDeleteConsole = async (console: Console) => {
+        if (console.id) {
+            await ConsoleService.deleteConsole(console.id);
+            getConsoles();
+        }
+    }
+
     useEffect(() => {
         getConsoles();
     }, []);
@@ -29,9 +36,10 @@ const Consoles: React.FC = () => {
                 <h2>Consoles overview</h2>
                 <section>
                     {
-                    consoles && <ConsoleOverview consoles={consoles} />
+                    consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
                     }
                 </section>
+                
             </main>
         </>
     );

@@ -81,9 +81,14 @@ const addConsole = (console : Console) : Console => {
     return console;
 }
 
+const deleteConsoleById = (id: number): void => {
+    consoles.splice(id + 1, 1);
+}
+
 export default {
     //getNextIdConsole,
     getAllConsoles,
     getConsoleById,
-    addConsole, 
+    addConsole,
+    deleteConsoleById,
 };

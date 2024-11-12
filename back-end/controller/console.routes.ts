@@ -22,10 +22,10 @@
  *            version:
  *              type: string
  *              description: Console version.
- *             brand:
+ *            brand:
  *              type: string
  *              description: Console brand.
- *             releaseDate:
+ *            releaseDate:
  *              type: string
  *              description: Console release date.
  */
@@ -121,5 +121,15 @@ consoleRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+consoleRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params);
+
+    try {
+        consoleService.deleteConsole(id);
+        res.status(200).json({ message: "Console deleted successfully" });
+    } catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
+});
 
 export { consoleRouter };

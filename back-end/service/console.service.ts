@@ -49,4 +49,8 @@ const addConsole = async ({
     return await consoleDb.addConsole(console);
 }
 
-export default { getAllConsoles, getConsoleById, addConsole, };
+const deleteConsole = (id: number): void => {
+    consoleDb.deleteConsoleById(id);
+}
+
+export default { getAllConsoles, getConsoleById, addConsole, deleteConsole, };

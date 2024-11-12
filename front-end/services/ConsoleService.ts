@@ -19,9 +19,20 @@ const addConsole = async (console: Console) => {
     })
 }
 
+const deleteConsole = async (consoleId: number) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+  return fetch(`${apiUrl}/consoles/${consoleId}`, {
+      method: "DELETE",
+      headers: {
+          'Content-Type': 'application/json',
+      }
+  });
+};
+
 const ConsoleService = {
   getAllConsoles,
   addConsole,
+  deleteConsole,
 };
 
 export default ConsoleService;
