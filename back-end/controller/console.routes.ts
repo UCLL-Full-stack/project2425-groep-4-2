@@ -121,6 +121,34 @@ consoleRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+/**
+ * @swagger
+ * /consoles/{id}:
+ *   delete:
+ *     summary: Delete a console by ID
+ *     description: Deletes a console specified by its unique ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: The unique identifier of the console to be deleted.
+ *     responses:
+ *       200:
+ *         description: Console deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Console deleted successfully"
+ *     tags:
+ *       - Console
+ */
 consoleRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params);
 
