@@ -3,6 +3,7 @@ export type User = {
     name: string;
     email: string;
     dateOfBirth: Date;
+    blacklisted: boolean;
     role?: "normal";
     consoles: [];
     reviews: [];

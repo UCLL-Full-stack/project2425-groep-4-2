@@ -9,4 +9,21 @@ const getUserById = (id: number): User => {
     return user;
 };
 
-export default { getAllUsers, getUserById };
+const updateUserBlacklist = async (user: User) => {
+    const id = user.getId();
+    if(!id){}
+    else{
+    const updatedUser = userDb.getUsersById({id});
+    if(!updatedUser){}
+    else{
+    updatedUser.getBlacklisted = user.getBlacklisted;
+
+    userDb.saveUser(updatedUser); 
+
+    return updatedUser;
+    }
+}
+    return user
+}
+
+export default { getAllUsers, getUserById, updateUserBlacklist, };

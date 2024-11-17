@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { User } from "@/types"
 
 const getAllUsers = async () => {
   return await fetch(process.env.NEXT_PUBLIC_API_URL + '/users', {
@@ -19,10 +20,25 @@ const getUserById = (userId: string) => {
   }
 }
 
+export const updateBlacklistStatus = async (user: User) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/users/${user.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+    user
+    }),
+  });
+
+  return await response.json();
+}
+
 
 const UserService = {
   getAllUsers,
   getUserById,
+  updateBlacklistStatus,
 };
 
 export default UserService;

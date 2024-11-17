@@ -7,6 +7,7 @@ export class User {
     private name: string;
     private email: string;
     private dateOfBirth: Date;
+    private blacklisted: boolean;
     private role: Role;
     private consoles : Console[];
     private reviews : Review[];
@@ -16,6 +17,7 @@ export class User {
         name: string;
         email: string;
         dateOfBirth: Date;
+        blacklisted: boolean;
         role: Role;
         consoles : Console[];
         reviews : Review[];
@@ -24,6 +26,7 @@ export class User {
         this.name = user.name;
         this.email = user.email;
         this.dateOfBirth = user.dateOfBirth;
+        this.blacklisted = user.blacklisted;
         this.role = user.role;
         this.consoles = user.consoles;
         this.reviews = user.reviews;
@@ -56,4 +59,12 @@ export class User {
     getReviews() : Review[]{
         return this.reviews;
     }
+
+    getBlacklisted() : boolean{
+        return this.blacklisted;
+    }
+
+    setBlacklisted(status: boolean): void {
+        this.blacklisted = status;
+      }
 }

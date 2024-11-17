@@ -102,6 +102,7 @@ const users = [
         name: "Harry",
         email: "harry@outlook.com",
         dateOfBirth: new Date(2021, 11, 17),
+        blacklisted: false,
         role: "normal",
         consoles: consolesUserOne,
         reviews: reviewsUserOne,
@@ -112,6 +113,7 @@ const users = [
         name: "Not Harry",
         email: "notharry@gmail.com",
         dateOfBirth: new Date(2021, 11, 17),
+        blacklisted: false,
         role: "normal",
         consoles: consolesUserTwo,
         reviews: reviewsUserTwo,
@@ -124,7 +126,16 @@ const getUsersById = ({ id }: { id: number }): User | null => {
     return users.find((user) => user.getId() === id) || null;
 };
 
+const saveUser = (updatedUser: User): User | null => {
+    const userIndex = users.findIndex(user => user.getId() === updatedUser.getId());
+  
+    users[userIndex].setBlacklisted(updatedUser.getBlacklisted());
+  
+    return users[userIndex];
+}
+
 export default {
     getAllUsers,
     getUsersById,
+    saveUser,
 };

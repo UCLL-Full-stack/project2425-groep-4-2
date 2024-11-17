@@ -84,4 +84,41 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
     }
 });
 
+/**
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     summary: Update a user's details, including blacklist status.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *           required: true
+ *           description: The user ID.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               user:
+ *                 $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: User successfully updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ */
+userRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const userId = Number(req.params.id);
+    const { user } = req.body;
+    const updatedUser = await userService.updateUserBlacklist(user);
+
+    res.status(200).json(updatedUser);
+});
+
 export { userRouter };
