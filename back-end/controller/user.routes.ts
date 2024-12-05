@@ -28,6 +28,8 @@
  */
 import express, { NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
+import { User } from '../model/user';
+import { UserInput } from '../types';
 
 const userRouter = express.Router();
 
@@ -114,11 +116,18 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
  *               $ref: '#/components/schemas/User'
  */
 userRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
-    const userId = Number(req.params.id);
-    const { user } = req.body;
+    try{
+    const user = <UserInput>req.body;
     const updatedUser = await userService.updateUserBlacklist(user);
 
+    //const dateOfBirthTest = new Date(2021, 11, 17);
+    //const user2 = new User({id: 3, name: "name", email: "email", dateOfBirth: dateOfBirthTest, role: 'normal', 
+    //    blacklisted: true, consoles: [], reviews: []});
+
     res.status(200).json(updatedUser);
+    }catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
 });
 
 export { userRouter };

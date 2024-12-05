@@ -26,9 +26,7 @@ export const updateBlacklistStatus = async (user: User) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-    user
-    }),
+    body: JSON.stringify(user),
   });
 
   return await response.json();

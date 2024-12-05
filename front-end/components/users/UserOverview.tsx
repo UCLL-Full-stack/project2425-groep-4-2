@@ -1,6 +1,6 @@
+import UserService from '@/services/UserService';
 import { User } from '@/types';
 import React from 'react';
-import { updateBlacklistStatus } from '@/services/UserService'
 
 type Props = {
   users: Array<User>;
@@ -10,8 +10,7 @@ type Props = {
 const handleBlacklist = async (user: User) => {
     const toUpdateUser = user;
     toUpdateUser.blacklisted = !toUpdateUser.blacklisted;
-    const updatedUser = await updateBlacklistStatus(toUpdateUser);
-    user.blacklisted = updatedUser.blacklisted;
+    await UserService.updateBlacklistStatus(toUpdateUser); 
 };
 
 const UserOverview: React.FC<Props> = ({ users }: Props) => {

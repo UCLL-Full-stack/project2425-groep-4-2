@@ -113,7 +113,7 @@ const users = [
         name: "Not Harry",
         email: "notharry@gmail.com",
         dateOfBirth: new Date(2021, 11, 17),
-        blacklisted: false,
+        blacklisted: true,
         role: "normal",
         consoles: consolesUserTwo,
         reviews: reviewsUserTwo,
