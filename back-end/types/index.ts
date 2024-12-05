@@ -6,6 +6,7 @@ type UserInput = {
     email: string;
     dateOfBirth: Date;
     role: Role;
+    blacklisted: boolean;
 };
 
 type NormalInput = {

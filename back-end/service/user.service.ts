@@ -1,5 +1,6 @@
 import { User } from '../model/user';
 import userDb from '../repository/user.db';
+import { UserInput } from '../types';
 
 const getAllUsers = (): User[] => userDb.getAllUsers();
 
@@ -9,21 +10,26 @@ const getUserById = (id: number): User => {
     return user;
 };
 
-const updateUserBlacklist = async (user: User) => {
-    const id = user.getId();
-    if(!id){}
-    else{
+const updateUserBlacklist = async ({
+    id,
+    name,
+    email,
+    dateOfBirth,
+    role,
+    blacklisted,
+    }: UserInput): Promise<User> => {
+
+    if(id){
     const updatedUser = userDb.getUsersById({id});
-    if(!updatedUser){}
-    else{
-    updatedUser.getBlacklisted = user.getBlacklisted;
+    if(updatedUser){
+    updatedUser.setBlacklisted(blacklisted);
 
     userDb.saveUser(updatedUser); 
 
-    return updatedUser;
+    return await updatedUser;
     }
 }
-    return user
+    throw new Error('No blacklisted');
 }
 
 export default { getAllUsers, getUserById, updateUserBlacklist, };
