@@ -33,10 +33,9 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                   <td>{console.version}</td>
                   <td>{console.brand}</td>
                   <td>
-                    {console.releaseDate.substring(8, 10)}
-                    {console.releaseDate.substring(4, 8)}
-                    {console.releaseDate.substring(0, 4)}
-                  
+                    {console.releaseDate
+                    ? new Date(console.releaseDate).toLocaleDateString('en-GB') 
+                    : "N/A"}
                   </td>
                   <td
                       onClick={() => onDeleteConsole(console)}
@@ -47,16 +46,12 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
             ))
           ) : (
             <tr>
-              <td colSpan={7}>You currently don't have consoles</td>
+              <td colSpan={6}>You currently don't have consoles</td>
             </tr>
           )}
           </tbody>
         </table>
       )}
-        {(
-          <AddConsole
-          />
-        )}
     </>
   );
 };

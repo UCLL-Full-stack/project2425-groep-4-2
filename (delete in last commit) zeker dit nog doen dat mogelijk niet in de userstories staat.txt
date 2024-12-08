@@ -7,5 +7,5 @@ blacklist userstory is anders geimplementeerd dan de userstory zegt
 project:
 alle testen domein en service (onder back-end/test/model of back-end/test/service)
 2 frontend testen
-if no consoles / games are in your library show the specified message
-formulieren achter een knop plaatsen (fix consoles)
+if no games are in your library show the specified message
+formulieren achter een knop plaatsen (fix consoles?)
