@@ -5,7 +5,7 @@ toevoegen security userstory/s
 blacklist userstory is anders geimplementeerd dan de userstory zegt
 
 project:
-alle testen domein en service (onder back-end/test/model of back-end/test/service)
+alle testen domein en service
 2 frontend testen
 if no games are in your library show the specified message
 formulieren achter een knop plaatsen (fix consoles?)
