@@ -1,3 +1,4 @@
+import { Console } from './console'
 export class Game {
     private id?: number;
     private name: string;
