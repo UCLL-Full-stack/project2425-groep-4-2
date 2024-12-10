@@ -7,11 +7,14 @@ type UserInput = {
     dateOfBirth: Date;
     role: Role;
     blacklisted: boolean;
+    password: string;
+    consoles: ConsoleInput[];
 };
 
 type ReviewerInput = {
     id?: number;
     reviews : ReviewInput[];
+    user: UserInput;
 };
 
 type ReviewInput = {
@@ -19,7 +22,7 @@ type ReviewInput = {
     stars: number;
     description: string;
     game : GameInput;
-    reviewer: ReviewerInput;
+    reviewerId: number;
 }
 
 type ConsoleInput = {
@@ -29,6 +32,8 @@ type ConsoleInput = {
     version: string;
     brand: string;
     releaseDate: string;
+    games: GameInput[];
+    userId: number;
 };
 
 type GameInput = {
@@ -37,7 +42,6 @@ type GameInput = {
     genre: string;
     releaseDate: Date;
     developer: string;
-    consoles : ConsoleInput[];
 }
 
 export {
