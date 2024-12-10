@@ -1,35 +1,47 @@
+import bcrypt from 'bcrypt';
+import userDB from '../repository/user.db';
 import { User } from '../model/user';
-import userDb from '../repository/user.db';
 import { UserInput } from '../types';
 
-const getAllUsers = (): User[] => userDb.getAllUsers();
+const getAllUsers = async (): Promise<User[]> => userDB.getAllUsers();
 
-const getUserById = (id: number): User => {
-    const user = userDb.getUsersById({ id });
-    if (!user) throw new Error(`User with id ${id} does not exist.`);
-    return user;
+/*
+const authenticate = async ({ username, password }: UserInput): Promise<AuthenticationResponse> => {
+    const user = await getUserByUsername({ username });
+
+    const isValidPassword = await bcrypt.compare(password, user.getPassword());
+
+    if (!isValidPassword) {
+        throw new Error('Incorrect password.');
+    }
+    return {
+        token: generateJwtToken({ username, role: user.getRole() }),
+        username: username,
+        fullname: `${user.getFirstName()} ${user.getLastName()}`,
+        role: user.getRole(),
+    };
 };
 
-const updateUserBlacklist = async ({
-    id,
-    name,
+
+const createUser = async ({
+    username,
+    password,
+    firstName,
+    lastName,
     email,
-    dateOfBirth,
     role,
-    blacklisted,
-    }: UserInput): Promise<User> => {
+}: UserInput): Promise<User> => {
+    const existingUser = await userDB.getUserByUsername({ username });
 
-    if(id){
-    const updatedUser = userDb.getUsersById({id});
-    if(updatedUser){
-    updatedUser.setBlacklisted(blacklisted);
-
-    userDb.saveUser(updatedUser); 
-
-    return await updatedUser;
+    if (existingUser) {
+        throw new Error(`User with username ${username} is already registered.`);
     }
-}
-    throw new Error('No blacklisted');
-}
 
-export default { getAllUsers, getUserById, updateUserBlacklist, };
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = new User({ username, password: hashedPassword, firstName, lastName, email, role });
+
+    return await userDB.createUser(user);
+};
+*/
+
+export default { getAllUsers };

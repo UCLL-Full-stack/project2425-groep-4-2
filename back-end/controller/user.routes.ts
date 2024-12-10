@@ -77,6 +77,7 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  *                      schema:
  *                          $ref: '#/components/schemas/User'
  */
+/*
 userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await userService.getUserById(Number(req.params.id));
@@ -85,7 +86,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
         next(error);
     }
 });
-
+*/
 /**
  * @swagger
  * /users/{id}:
@@ -115,6 +116,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
  *             schema:
  *               $ref: '#/components/schemas/User'
  */
+/*
 userRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try{
     const user = <UserInput>req.body;
@@ -129,5 +131,5 @@ userRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) =
         res.status(400).json({status: 'error', errorMessage: error});
     }
 });
-
+*/
 export { userRouter };

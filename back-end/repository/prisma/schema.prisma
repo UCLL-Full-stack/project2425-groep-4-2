@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Console {
+    id              Int         @id @default(autoincrement())
+    price           Int
+    name            String
+    version         String
+    releaseDate     DateTime
+    brand           String
+    games           Game[]
+    userId          Int         
+    user            User        @relation(fields: [userId], references: [id])
+}
+
+model Game {
+    id              Int         @id @default(autoincrement())
+    name            String
+    genre           String
+    releaseDate     DateTime
+    developer       String
+    consoles        Console[]
+    reviews         Review[]
+}
+
+model Review {
+    id              Int         @id @default(autoincrement())
+    stars           Int
+    description     String
+    reviewerId      Int         
+    reviewer        Reviewer    @relation(fields: [reviewerId], references: [id])
+    gameId          Int         
+    game            Game        @relation(fields: [gameId], references: [id])
+}
+
+model Reviewer {
+    id              Int         @id @default(autoincrement())
+    reviews         Review[]
+    userId          Int         @unique
+    user            User        @relation(fields: [userId], references: [id])
+}
+
+model User {
+    id              Int         @id @default(autoincrement())
+    name            String
+    email           String      @unique
+    password        String
+    dateOfBirth     DateTime
+    blacklisted     Boolean
+    role            String
+    consoles        Console[]
+    reviewer        Reviewer?
+}

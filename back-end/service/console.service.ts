@@ -1,3 +1,4 @@
+/*
 import { Console } from '../model/console';
 import consoleDb from '../repository/console.db';
 import { ConsoleInput } from '../types';
@@ -31,3 +32,4 @@ const deleteConsole = (id: number): void => {
 }
 
 export default { getAllConsoles, getConsoleById, addConsole, deleteConsole, };
+*/

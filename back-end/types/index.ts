@@ -1,4 +1,4 @@
-type Role = 'normal' | 'manager' | 'reviewer';
+type Role = 'normal' | 'admin' | 'reviewer';
 
 type UserInput = {
     id?: number;
@@ -9,17 +9,18 @@ type UserInput = {
     blacklisted: boolean;
 };
 
-type NormalInput = {
-    
-};
-
-type ManagerInput = {
-    
-};
-
 type ReviewerInput = {
-    
+    id?: number;
+    reviews : ReviewInput[];
 };
+
+type ReviewInput = {
+    id?: number;
+    stars: number;
+    description: string;
+    game : GameInput;
+    reviewer: ReviewerInput;
+}
 
 type ConsoleInput = {
     id?: number;
@@ -30,11 +31,20 @@ type ConsoleInput = {
     releaseDate: string;
 };
 
+type GameInput = {
+    id?: number;
+    name: string;
+    genre: string;
+    releaseDate: Date;
+    developer: string;
+    consoles : ConsoleInput[];
+}
+
 export {
     UserInput,
     Role,
-    NormalInput,
-    ManagerInput,
     ReviewerInput, 
     ConsoleInput,
+    ReviewInput,
+    GameInput,
 };

@@ -5,9 +5,11 @@ import * as bodyParser from 'body-parser';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.routes';
-import { consoleRouter } from './controller/console.routes';
+//import { consoleRouter } from './controller/console.routes';
+import helmet from 'helmet';
 
 const app = express();
+app.use(helmet());
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 
@@ -15,7 +17,7 @@ app.use(cors({origin: 'http://localhost:8080'}));
 app.use(bodyParser.json());
 
 app.use('/users', userRouter);
-app.use('/consoles', consoleRouter);
+//app.use('/consoles', consoleRouter);
 
 const swaggerOpts = {
     definition: {
