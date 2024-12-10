@@ -2,7 +2,12 @@ import ConsoleService from '@/services/ConsoleService';
 import { Console } from '@/types';
 import React, { useState } from 'react';
 
-const AddConsole: React.FC = () => {
+type Props = {
+  toggleForm: () => void;
+  onAddConsole: (console: Console) => void;
+};
+
+const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
   const [id, setId] = useState<number | undefined>()
   const [price, setPrice] = useState<number | undefined>()
   const [name, setName] = useState('')
@@ -11,6 +16,22 @@ const AddConsole: React.FC = () => {
   const [releaseDate, setDate] = useState('')
 
   const handleAddConsole = async () => {
+    if (!price) {
+      alert("price is required")
+    }
+    if (!name) {
+      alert("name is required")
+    }
+    if (!version) {
+      alert("version is required")
+    }
+    if (!brand) {
+      alert("brand is required")
+    }
+    if (!releaseDate) {
+      alert("release date is required")
+    }
+
     const newConsole: Console = {
       id,
       price,
@@ -19,7 +40,9 @@ const AddConsole: React.FC = () => {
       brand,
       releaseDate,
     }
-    await ConsoleService.addConsole(newConsole)
+    await ConsoleService.addConsole(newConsole);
+    onAddConsole(newConsole);
+    toggleForm();
   }
   
   return (
@@ -64,12 +87,20 @@ const AddConsole: React.FC = () => {
           value={releaseDate}
           onChange={(value) => setDate(value.target.value)}
         />
+      <div>  
       <button
-        className="bg-blue-500 text-white p-2 rounded-lg"
+        className="bg-blue-500 text-black p-2 rounded-lg"
+        onClick={toggleForm}
+      >
+        Cancel
+      </button>
+      <button
+        className="bg-blue-500 text-black p-2 rounded-lg"
         onClick={handleAddConsole}
       >
         Add Console
       </button>
+      </div>
         </form>
     </>
   );
