@@ -17,3 +17,19 @@ export type Console = {
   brand: string;
   releaseDate: string;
   };
+
+export type Game = {
+  id?: number
+  name: string;
+  genre: string;
+  releaseDate: Date;
+  developer: string;
+}
+
+export type Review = {
+  id?: number;
+  stars: number;
+  description: string;
+  game : Game;
+  reviewerId: number;
+}
