@@ -1,16 +1,16 @@
-import consoleService from '../../service/console.service'
-import consoleDb from '../../repository/console.db';
-import { Console } from '../../model/console';
-import { Game } from '../../model/game';
+// import consoleService from '../../service/console.service'
+// import consoleDb from '../../repository/console.db';
+// import { Console } from '../../model/console';
+// import { Game } from '../../model/game';
 
-let createConsoleMock: jest.Mock<Console, [Console]>; 
+// let createConsoleMock: jest.Mock<Console, [Console]>; 
 
-beforeEach(() => {
-    createConsoleMock = jest.fn();
+// beforeEach(() => {
+//     createConsoleMock = jest.fn();
 
-    consoleDb.addConsole = createConsoleMock;
-});
+//     consoleDb.addConsole = createConsoleMock;
+// });
 
-afterEach(() => {
-    jest.clearAllMocks(); 
-});
+// afterEach(() => {
+//     jest.clearAllMocks(); 
+// });
