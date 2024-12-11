@@ -5,7 +5,9 @@ import * as bodyParser from 'body-parser';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.routes';
-//import { consoleRouter } from './controller/console.routes';
+import { consoleRouter } from './controller/console.routes';
+import { reviewerRouter } from './controller/reviewer.routes';
+import { gameRouter } from './controller/game.routes';
 import helmet from 'helmet';
 
 const app = express();
@@ -17,7 +19,10 @@ app.use(cors({origin: 'http://localhost:8080'}));
 app.use(bodyParser.json());
 
 app.use('/users', userRouter);
-//app.use('/consoles', consoleRouter);
+app.use('/consoles', consoleRouter);
+app.use('/reviewers', reviewerRouter);
+app.use('/games', gameRouter);
+app.use('/reviews', reviewerRouter);
 
 const swaggerOpts = {
     definition: {

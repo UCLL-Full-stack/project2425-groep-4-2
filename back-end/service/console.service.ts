@@ -1,35 +1,35 @@
-/*
 import { Console } from '../model/console';
 import consoleDb from '../repository/console.db';
 import { ConsoleInput } from '../types';
 
-const getAllConsoles = (): Console[] => consoleDb.getAllConsoles();
+const getAllConsoles = (): Promise<Console[]> => consoleDb.getAllConsoles();
 
-const getConsoleById = (id: number): Console => {
-    const console = consoleDb.getConsoleById({ id });
-    if (!console) throw new Error(`Console with id ${id} does not exist.`);
+const getConsoleById = async( id: number): Promise<Console> => {
+    const console = await consoleDb.getConsoleById({id});
+
+    if(!console){
+        throw new Error(`Console with id ${id} does not exist.`);
+    }
+
     return console;
-};
+}
 
-const addConsole = async ({
-    //id: inputId,
-    id,
-    price,
+
+const createConsole = async ({
     name,
+    price,
     version,
     brand,
-    releaseDate: releaseDateString,
+    releaseDate: date,
+    games,
+    userId,
 }: ConsoleInput): Promise<Console> => {
-    const dateNumber = Date.parse(releaseDateString);
-    const releaseDate = new Date(dateNumber);
+    const dateString = date;
+    const releaseDate = new Date(dateString);
 
-    const console = new Console({id, price, name, version, releaseDate, brand, games : []})
-    return await consoleDb.addConsole(console);
-}
+    const console = new Console({ name, price, version, brand, releaseDate, games: [], userId, });
 
-const deleteConsole = (id: number): void => {
-    consoleDb.deleteConsoleById(id);
-}
+    return await consoleDb.createConsole(console);
+};
 
-export default { getAllConsoles, getConsoleById, addConsole, deleteConsole, };
-*/
+export default { getAllConsoles, createConsole, getConsoleById, };

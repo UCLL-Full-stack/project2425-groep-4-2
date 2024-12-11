@@ -29,13 +29,13 @@
  *              type: string
  *              description: Console release date.
  */
-/*
+
 import express, { NextFunction, Request, Response } from 'express';
 import consoleService from '../service/console.service';
 import { ConsoleInput } from '../types';
 
 const consoleRouter = express.Router();
-*/
+
 /**
  * @swagger
  * /Consoles:
@@ -51,7 +51,7 @@ const consoleRouter = express.Router();
  *               items:
  *                  $ref: '#/components/schemas/Console'
  */
-/*
+
 consoleRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const consoles = await consoleService.getAllConsoles();
@@ -60,7 +60,7 @@ consoleRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
         next(error);
     }
 });
-*/
+
 /**
  * @swagger
  * /consoles/{id}:
@@ -81,7 +81,7 @@ consoleRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
  *                      schema:
  *                          $ref: '#/components/schemas/Console'
  */
-/*
+
 consoleRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const console = await consoleService.getConsoleById(Number(req.params.id));
@@ -90,7 +90,7 @@ consoleRouter.get('/:id', async (req: Request, res: Response, next: NextFunction
         next(error);
     }
 });
-*/
+
 
 /**
  * @swagger
@@ -164,6 +164,5 @@ consoleRouter.delete('/:id', async (req: Request, res: Response, next: NextFunct
         res.status(400).json({status: 'error', errorMessage: error});
     }
 });
-
-export { consoleRouter };
 */
+export { consoleRouter };

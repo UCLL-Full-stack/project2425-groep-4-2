@@ -77,7 +77,7 @@ userRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  *                      schema:
  *                          $ref: '#/components/schemas/User'
  */
-/*
+
 userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await userService.getUserById(Number(req.params.id));
@@ -86,7 +86,7 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
         next(error);
     }
 });
-*/
+
 /**
  * @swagger
  * /users/{id}:
@@ -116,20 +116,16 @@ userRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
  *             schema:
  *               $ref: '#/components/schemas/User'
  */
-/*
+
 userRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try{
     const user = <UserInput>req.body;
     const updatedUser = await userService.updateUserBlacklist(user);
-
-    //const dateOfBirthTest = new Date(2021, 11, 17);
-    //const user2 = new User({id: 3, name: "name", email: "email", dateOfBirth: dateOfBirthTest, role: 'normal', 
-    //    blacklisted: true, consoles: [], reviews: []});
 
     res.status(200).json(updatedUser);
     }catch (error) {
         res.status(400).json({status: 'error', errorMessage: error});
     }
 });
-*/
+
 export { userRouter };
