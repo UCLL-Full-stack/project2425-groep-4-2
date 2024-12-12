@@ -39,6 +39,8 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
       version,
       brand,
       releaseDate,
+      games: [],
+      userId: 0
     }
     await ConsoleService.addConsole(newConsole);
     onAddConsole(newConsole);

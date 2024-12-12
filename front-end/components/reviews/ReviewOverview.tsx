@@ -1,6 +1,6 @@
 import { Review, } from '@/types';
 import React from 'react';
-// import AddReview from './AddReview';
+import AddReview from './AddReview';
 import ReviewService from '@/services/ReviewService';
 
 type Props = {
@@ -40,7 +40,7 @@ const ReviewOverview: React.FC<Props> = ({ reviews, onDeleteReview }: Props) => 
             ))
           ) : (
             <tr>
-              <td colSpan={6}>You currently don't have reviews</td>
+              <td colSpan={6}>There are currently no reviews</td>
             </tr>
           )}
           </tbody>

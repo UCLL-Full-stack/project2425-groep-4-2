@@ -10,3 +10,9 @@ alle testen domein en service
 if no games are in your library show the specified message
 formulieren achter een knop plaatsen (fix consoles?)
 reviewerId in ReviewOverview moet mischien de username van de reviewer worden
+userid in addconsole zou moeten de user zijn die het gebruikt
+games zouden mischien een colomn moeten hebben van de consoles(ook aanwezig in add games)
+id's in add forms verwijderen (auto asign)
+
+vragen aan lector:
+moet er een register page zijn
