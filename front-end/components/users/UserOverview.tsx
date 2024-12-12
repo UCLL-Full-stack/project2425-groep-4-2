@@ -4,16 +4,11 @@ import React from 'react';
 
 type Props = {
   users: Array<User>;
+  onBlacklistUser: (user: User) => void;
 };
 
 
-const handleBlacklist = async (user: User) => {
-    const toUpdateUser = user;
-    toUpdateUser.blacklisted = !toUpdateUser.blacklisted;
-    await UserService.updateBlacklistStatus(toUpdateUser); 
-};
-
-const UserOverview: React.FC<Props> = ({ users }: Props) => {
+const UserOverview: React.FC<Props> = ({ users, onBlacklistUser }: Props) => {
   return (
     <>
       {users && (
@@ -35,7 +30,7 @@ const UserOverview: React.FC<Props> = ({ users }: Props) => {
                 <td>
                   <button
                         className="hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-                        onClick={() => handleBlacklist(user)}
+                        onClick={() => onBlacklistUser(user)}
                       >
                         {user.blacklisted ? "Whitelist" : "Blacklist"}
                   </button>

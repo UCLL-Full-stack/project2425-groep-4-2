@@ -14,6 +14,13 @@ const Users: React.FC = () => {
         setUsers(json);
     };
 
+    const handleBlacklist = async (user: User) => {
+        const toUpdateUser = user;
+        toUpdateUser.blacklisted = !toUpdateUser.blacklisted;
+        await UserService.updateBlacklistStatus(toUpdateUser); 
+        getUsers();
+    };
+
     useEffect(() => {
         getUsers();
     }, []);
@@ -29,7 +36,7 @@ const Users: React.FC = () => {
                 <h2>Users overview</h2>
                 <section>
                     {
-                    users && <UserOverview users={users} />
+                    users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
                 </section>
             </main>
