@@ -2,7 +2,7 @@
 import ReviewOverview from "@/components/reviews/ReviewOverview";
 import Header from "@/components/header";
 import ReviewService from "@/services/ReviewService";
-import { Review } from "@/types";
+import { Review, ReviewData, } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
@@ -10,10 +10,22 @@ const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
 
+    const extractAllReviews = (data: ReviewData[]): Review[] => {
+      const allReviews: Review[] = [];
+      data.forEach((user: ReviewData) => {
+        user.reviews.forEach((review: Review) => {
+          allReviews.push(review);
+        });
+      });
+      return allReviews;
+    };
+    
+
     const getReviews = async () => {
         const response = await ReviewService.getAllReviews();
         const json = await response.json();
-        setReviews(json);
+        const allReviews = extractAllReviews(json);
+        setReviews(allReviews);
     };
 
     const handleAddReview = async () => {

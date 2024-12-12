@@ -5,8 +5,14 @@ export type User = {
     dateOfBirth: Date;
     blacklisted: boolean;
     role?: "normal";
-    consoles: [];
-    reviews: [];
+    consoles: Console[];
+    password: string;
+  };
+
+  export type Reviewer = {
+    id: number;
+    user: User;
+    reviews: Review[];
   };
 
 export type Console = {
@@ -16,6 +22,8 @@ export type Console = {
   version: string;
   brand: string;
   releaseDate: string;
+  games: Game[];
+  userId: number;
   };
 
 export type Game = {
@@ -32,4 +40,10 @@ export type Review = {
   description: string;
   game : Game;
   reviewerId: number;
+}
+
+export type ReviewData = { 
+  id: number; 
+  reviews: Review[]; 
+  user: User; 
 }

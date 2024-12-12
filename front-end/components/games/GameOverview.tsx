@@ -16,10 +16,9 @@ const GameOverview: React.FC<Props> = ({ games, onDeleteGame }: Props) => {
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Price</th>
               <th scope="col">Name</th>
-              <th scope="col">Version</th>
-              <th scope="col">Brand</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Developer</th>
               <th scope="col">Release date</th>
             </tr>
           </thead>
