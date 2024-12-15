@@ -13,6 +13,7 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
   const [stars, setStars] = useState<number>(1)
   const [description, setDescription] = useState('')
   const [gameName, setGameName] = useState('')
+  const [reviewerId, setReviewerId] = useState<number>(1)
 
   const handleAddReview = async () => {
     if (!stars) {
@@ -32,7 +33,7 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
       stars,
       description,
       game,
-      reviewerId: 0,
+      reviewerId,
     }
     await ReviewService.addReview(newReview);
     onAddReview(newReview);
@@ -72,6 +73,13 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
           className="border p-2 mb-4 w-full"
           value={description}
           onChange={(value) => setDescription(value.target.value)}
+        />
+        <label>reviewer</label>
+        <input
+          type='number'
+          className="border p-2 mb-4 w-full"
+          value={reviewerId}
+          onChange={(value) => setReviewerId(value.target.valueAsNumber)}
         />
       <div>  
       <button

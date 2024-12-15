@@ -58,4 +58,38 @@ reviewRouter.get('/', async (req: Request, res: Response, next: NextFunction) =>
     }
 });
 
+
+/**
+ * @swagger
+ * /reviews:
+ *   post:
+ *     summary: Add a review to the current user
+ *     requestBody:
+ *      required: true
+ *      content:
+ *           application/json:
+ *               schema:
+ *                   $ref: '#/components/schemas/ReviewInput'
+ * 
+ *     responses:
+ *        200:
+ *           description: A review is added
+ *           content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Review'
+ * 
+ *        
+ */
+
+reviewRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const review = <ReviewInput>req.body;
+        const result = reviewService.createReview(review);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
+});
+
 export { reviewRouter };

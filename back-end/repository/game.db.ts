@@ -27,6 +27,21 @@ const getGameById = async ({ id }: { id: number }): Promise<Game | null> => {
     }
 };
 
+const getGameByName = async ({ name }: { name: string }): Promise<Game | null> => {
+    try {
+        const gamePrisma = await database.game.findFirst({
+            where: { name },
+        });
+
+        if (!gamePrisma) { return null; }
+
+        return Game.from(gamePrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 const createGame = async (game: Game): Promise<Game> => {
     try {
         const gamePrisma = await database.game.create({
@@ -48,5 +63,6 @@ const createGame = async (game: Game): Promise<Game> => {
 export default {
     getAllGames,
     getGameById,
+    getGameByName,
     createGame,
 };

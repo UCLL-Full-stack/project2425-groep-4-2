@@ -1,3 +1,4 @@
+import { Game } from '../model/game';
 import { Review } from '../model/review';
 import gameDb from '../repository/game.db';
 import reviewDb from '../repository/review.db';
@@ -29,9 +30,16 @@ const createReview = async ({
     game: gameInput,
     reviewerId,
 }: ReviewInput): Promise<Review> => {
-    if (!gameInput.id) throw new Error('Game id is required');
+    let game: Game | null;
 
-    const game = await gameDb.getGameById({ id: gameInput.id });
+    if (!gameInput.id){
+
+        if (!gameInput.name){ throw new Error('Game name is required');}
+
+        game = await gameDb.getGameByName({ name: gameInput.name });
+    } else {
+        game = await gameDb.getGameById({ id: gameInput.id });
+    }
 
     if (!game) throw new Error('Game not found');
 
