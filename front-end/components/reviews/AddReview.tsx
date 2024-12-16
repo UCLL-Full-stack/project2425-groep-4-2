@@ -12,8 +12,8 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
   const [id, setId] = useState<number | undefined>()
   const [stars, setStars] = useState<number>(1)
   const [description, setDescription] = useState('')
-  const [gameName, setGameName] = useState('')
-  const [reviewerId, setReviewerId] = useState<number>(1)
+  const [gameId, setGameId] = useState<number>(19)
+  const [reviewerId, setReviewerId] = useState<number>(7)
 
   const handleAddReview = async () => {
     if (!stars) {
@@ -22,17 +22,14 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
     if (!description) {
       alert("description is required")
     }
-    if (!gameName) {
-      alert("game is required")
+    if (!gameId) {
+      alert("Game id is required")
     }
 
-    const game = {name: gameName, genre: "", releaseDate: new Date(), developer: ""};
-
     const newReview: Review = {
-      id,
       stars,
       description,
-      game,
+      gameId,
       reviewerId,
     }
     await ReviewService.addReview(newReview);
@@ -43,18 +40,12 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
   return (
     <>
     <form style={{display: 'grid'}}>
-      <label>Id</label>
+      <label>Game id</label>
         <input
           type='number'
           className="border p-2 mb-4 w-full"
-          value={id}
-          onChange={(value) => setId(value.target.valueAsNumber)}
-        />
-        <label>Game</label>
-        <input
-          className="border p-2 mb-4 w-full"
-          value={gameName}
-          onChange={(value) => setGameName(value.target.value)}
+          value={gameId}
+          onChange={(value) => setGameId(value.target.valueAsNumber)}
         />
       <label>Stars</label>
       <select

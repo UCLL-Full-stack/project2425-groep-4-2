@@ -27,23 +27,19 @@ const getReviewByGameName = async ({ gameName }: { gameName: string }): Promise<
 const createReview = async ({
     stars,
     description,
-    game: gameInput,
+    gameId,
     reviewerId,
 }: ReviewInput): Promise<Review> => {
     let game: Game | null;
 
-    if (!gameInput.id){
+    if (!gameId){
+        throw new Error('Game name is required');
+    } 
 
-        if (!gameInput.name){ throw new Error('Game name is required');}
-
-        game = await gameDb.getGameByName({ name: gameInput.name });
-    } else {
-        game = await gameDb.getGameById({ id: gameInput.id });
-    }
+    game = await gameDb.getGameById({ id: gameId });
+    
 
     if (!game) throw new Error('Game not found');
-
-    //Check if reviewer already have a review for this game
 
     const review = new Review({ stars, description, game, reviewerId });
 

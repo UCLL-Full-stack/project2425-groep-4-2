@@ -21,7 +21,7 @@ type ReviewInput = {
     id?: number;
     stars: number;
     description: string;
-    game : GameInput;
+    gameId : number;
     reviewerId: number;
 }
 

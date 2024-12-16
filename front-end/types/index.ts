@@ -38,7 +38,7 @@ export type Review = {
   id?: number;
   stars: number;
   description: string;
-  game : Game;
+  gameId : number;
   reviewerId: number;
 }
 

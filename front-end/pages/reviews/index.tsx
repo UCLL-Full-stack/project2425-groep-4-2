@@ -10,6 +10,7 @@ const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
 
+    /*
     const extractAllReviews = (data: ReviewData[]): Review[] => {
       const allReviews: Review[] = [];
       data.forEach((user: ReviewData) => {
@@ -19,13 +20,14 @@ const Reviews: React.FC = () => {
       });
       return allReviews;
     };
+    */
     
 
     const getReviews = async () => {
         const response = await ReviewService.getAllReviews();
         const json = await response.json();
-        const allReviews = extractAllReviews(json);
-        setReviews(allReviews);
+        //const allReviews = extractAllReviews(json);
+        setReviews(json);
     };
 
     const handleAddReview = async () => {

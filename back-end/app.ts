@@ -8,6 +8,7 @@ import { userRouter } from './controller/user.routes';
 import { consoleRouter } from './controller/console.routes';
 import { reviewerRouter } from './controller/reviewer.routes';
 import { gameRouter } from './controller/game.routes';
+import { reviewRouter } from './controller/review.routes';
 import helmet from 'helmet';
 
 const app = express();
@@ -22,7 +23,7 @@ app.use('/users', userRouter);
 app.use('/consoles', consoleRouter);
 app.use('/reviewers', reviewerRouter);
 app.use('/games', gameRouter);
-app.use('/reviews', reviewerRouter);
+app.use('/reviews', reviewRouter);
 
 const swaggerOpts = {
     definition: {
