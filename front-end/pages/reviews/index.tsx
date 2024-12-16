@@ -1,4 +1,4 @@
-// import AddReview from "@/components/reviews/AddReview";
+import AddReview from "@/components/reviews/AddReview";
 import ReviewOverview from "@/components/reviews/ReviewOverview";
 import Header from "@/components/header";
 import ReviewService from "@/services/ReviewService";
@@ -66,12 +66,12 @@ const Reviews: React.FC = () => {
                     reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
                 </section>
-                {/* {isFormOpen && (
+                {isFormOpen && (
           <AddReview
             toggleForm={() => setIsFormOpen(false)}
             onAddReview={handleAddReview}
           />
-        )} */}
+        )}
             </main>
         </>
     );

@@ -27,7 +27,7 @@ export type Console = {
   };
 
 export type Game = {
-  id?: number
+  id?: number;
   name: string;
   genre: string;
   releaseDate: string;
