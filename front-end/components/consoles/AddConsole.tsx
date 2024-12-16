@@ -8,7 +8,6 @@ type Props = {
 };
 
 const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
-  const [id, setId] = useState<number | undefined>()
   const [price, setPrice] = useState<number | undefined>()
   const [name, setName] = useState('')
   const [version, setVersion] = useState('')
@@ -49,13 +48,6 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
   return (
     <>
     <form style={{display: 'grid'}}>
-      <label>Id</label>
-        <input
-          type='number'
-          className="border p-2 mb-4 w-full"
-          value={id}
-          onChange={(value) => setId(value.target.valueAsNumber)}
-        />
         <label>Price</label>
         <input
           type='number'
