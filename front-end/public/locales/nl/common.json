@@ -1,0 +1,52 @@
+{
+    "app.title": "De GameLib",
+    "app.welcome": "Welkom!",
+    "header": {
+        "title": "De GameLib",
+        "nav": {
+            "home": "Start Pagina",
+            "Users": "Gebruikers",
+            "consoles": "Spelcomputers",
+            "games": "Games",
+            "reviews": "Reviews",
+            "login": "Aanmelden",
+            "logout": "Afmelden",
+            "language": "Taal"
+        }
+    },
+    "consoles": {
+        "title": "Spelcomputers",
+        "add": "Voeg spelcomputers toe",
+        "h2": "spelcomputers overzicht",
+        "table": {
+            "price": "Prijs",
+            "name": "Naam",
+            "version": "Versie",
+            "brand": "Merk",
+            "date": "Uitgavedatum",
+            "text": "U heeft op het moment geen spelcomputers"
+        },
+        "form": {
+            "price": "Prijs",
+            "name": "Naam",
+            "version": "Versie",
+            "brand": "Merk",
+            "date": "datum",
+            "add": "spelcomputers toe",
+            "cancel": "Annuleren"
+        }
+    },
+    "login": {
+        "title": "Aanmelden",
+        "button": "Aanmelden",
+        "success": "Aanmelden succesvol. Doorsturen naar de start pagina...", 
+        "validate": { 
+            "name": "Naam is vereist", 
+            "password": "Wachtwoord is vereist" 
+        }, 
+        "label": { 
+            "username": "Gebruikersnaam:", 
+            "password": "Wachtwoord:" 
+        } 
+    }
+}

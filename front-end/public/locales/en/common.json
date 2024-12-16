@@ -1,0 +1,52 @@
+{
+    "app.title": "The GameLib",
+    "app.welcome": "Welcome!",
+    "header": {
+        "title": "The GameLib",
+        "nav": {
+            "home": "Home",
+            "Users": "Users",
+            "consoles": "Consoles",
+            "games": "Games",
+            "reviews": "Reviews",
+            "login": "Login",
+            "logout": "Logout",
+            "language": "Language"
+        }
+    },
+    "consoles": {
+        "title": "Consoles",
+        "add": "Add Console",
+        "h2": "Console overview",
+        "table": {
+            "price": "Price",
+            "name": "Name",
+            "version": "Version",
+            "brand": "Brand",
+            "date": "Release Date",
+            "text": "You currently don't have consoles"
+        },
+        "form": {
+            "price": "Price",
+            "name": "Name",
+            "version": "Version",
+            "brand": "Brand",
+            "date": "Date",
+            "add": "Add Console",
+            "cancel": "Cancel"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "button": "Login",
+        "success": "Login succesful. Redirecting to homepage...", 
+        "validate": { 
+            "name": "Name is required", 
+            "password": "Password is required" 
+        }, 
+        "label": { 
+            "username": "Username:", 
+            "password": "Password:" 
+        } 
+    }
+}
