@@ -114,17 +114,17 @@ consoleRouter.get('/:id', async (req: Request, res: Response, next: NextFunction
  * 
  *        
  */
-/*
+
 consoleRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
     try{
         const console = <ConsoleInput>req.body;
-        const result = consoleService.addConsole(console);
+        const result = consoleService.createConsole(console);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({status: 'error', errorMessage: error});
     }
 });
-*/
+
 /**
  * @swagger
  * /consoles/{id}:

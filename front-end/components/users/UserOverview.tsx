@@ -15,6 +15,7 @@ const UserOverview: React.FC<Props> = ({ users, onBlacklistUser }: Props) => {
         <table className="table table-hover">
           <thead>
             <tr>
+              <th scope="col">Id</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Role</th>
@@ -24,6 +25,7 @@ const UserOverview: React.FC<Props> = ({ users, onBlacklistUser }: Props) => {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
+                <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>

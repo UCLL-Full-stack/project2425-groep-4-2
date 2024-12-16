@@ -1,4 +1,5 @@
 //import AddGame from "@/components/games/AddGame";
+import AddGame from "@/components/games/AddGame";
 import GameOverview from "@/components/games/GameOverview";
 import Header from "@/components/header";
 import GameService from "@/services/GameService";
@@ -54,12 +55,12 @@ const Games: React.FC = () => {
                     games && <GameOverview games={games} onDeleteGame={handleDeleteGame} />
                     }
                 </section>
-                {/* {isFormOpen && (
+                {isFormOpen && (
           <AddGame
             toggleForm={() => setIsFormOpen(false)}
             onAddGame={handleAddGame}
           />
-        )} */}
+        )} 
             </main>
         </>
     );
