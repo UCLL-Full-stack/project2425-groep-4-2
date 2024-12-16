@@ -10,7 +10,8 @@
             "games": "Games",
             "reviews": "Reviews",
             "login": "Login",
-            "logout": "Logout"
+            "logout": "Logout",
+            "language": "Language"
         }
     },
     "consoles": {

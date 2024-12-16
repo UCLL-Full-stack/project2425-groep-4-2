@@ -10,7 +10,8 @@
             "games": "Games",
             "reviews": "Reviews",
             "login": "Aanmelden",
-            "logout": "Afmelden"
+            "logout": "Afmelden",
+            "language": "Taal"
         }
     },
     "consoles": {
