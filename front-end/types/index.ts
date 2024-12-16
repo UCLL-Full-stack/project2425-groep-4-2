@@ -30,7 +30,7 @@ export type Game = {
   id?: number
   name: string;
   genre: string;
-  releaseDate: Date;
+  releaseDate: string;
   developer: string;
 }
 

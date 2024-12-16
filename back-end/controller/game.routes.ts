@@ -58,5 +58,15 @@ gameRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+gameRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
+    try{
+        const game = <GameInput>req.body;
+        const result = gameService.createGame(game);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
+});
+
 
 export { gameRouter };
