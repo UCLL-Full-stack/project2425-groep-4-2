@@ -26,6 +26,7 @@
             "version": "Version",
             "brand": "Brand",
             "date": "Release Date",
+            "delete": "Delete",
             "text": "You currently don't have consoles"
         },
         "form": {
@@ -35,7 +36,14 @@
             "brand": "Brand",
             "date": "Date",
             "add": "Add Console",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "error": {
+                "price": "Price is required.",
+                "name": "Name is required.",
+                "version": "Version is required.",
+                "brand": "Brand is required.",
+                "date": "Release date is required."
+            }
         }
     },
     "login": {
