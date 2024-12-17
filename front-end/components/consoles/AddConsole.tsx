@@ -15,22 +15,23 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
   const [version, setVersion] = useState('')
   const [brand, setBrand] = useState('')
   const [releaseDate, setDate] = useState('')
+  const { t } = useTranslation();
 
   const handleAddConsole = async () => {
     if (!price) {
-      alert("price is required")
+      alert(t("consoles.form.error.price"))
     }
     if (!name) {
-      alert("name is required")
+      alert(t("consoles.form.error.name"))
     }
     if (!version) {
-      alert("version is required")
+      alert(t("consoles.form.error.version"))
     }
     if (!brand) {
-      alert("brand is required")
+      alert(t("consoles.form.error.brand"))
     }
     if (!releaseDate) {
-      alert("release date is required")
+      alert(t("consoles.form.error.date"))
     }
 
     const newConsole: Console = {
@@ -50,32 +51,32 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
   return (
     <>
     <form style={{display: 'grid'}}>
-        <label>Price</label>
+        <label>{t("consoles.form.price")}</label>
         <input
           type='number'
           className="border p-2 mb-4 w-full"
           value={price}
           onChange={(value) => setPrice(value.target.valueAsNumber)}
         />
-      <label>Name</label>
+      <label>{t("consoles.form.name")}</label>
         <input
           className="border p-2 mb-4 w-full"
           value={name}
           onChange={(value) => setName(value.target.value)}
         />
-      <label>Version</label>
+      <label>{t("consoles.form.version")}</label>
         <input
           className="border p-2 mb-4 w-full"
           value={version}
           onChange={(value) => setVersion(value.target.value)}
         />
-      <label>Brand</label>
+      <label>{t("consoles.form.brand")}</label>
         <input
           className="border p-2 mb-4 w-full"
           value={brand}
           onChange={(value) => setBrand(value.target.value)}
         />
-      <label>Date</label>
+      <label>{t("consoles.form.date")}</label>
         <input
           className="border p-2 mb-4 w-full"
           type='date'
@@ -87,13 +88,13 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
         className="bg-blue-500 text-black p-2 rounded-lg"
         onClick={toggleForm}
       >
-        Cancel
+        {t("consoles.form.cancel")}
       </button>
       <button
         className="bg-blue-500 text-black p-2 rounded-lg"
         onClick={handleAddConsole}
       >
-        Add Console
+        {t("consoles.form.add")}
       </button>
       </div>
         </form>

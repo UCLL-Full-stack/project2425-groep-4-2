@@ -26,6 +26,7 @@
             "version": "Versie",
             "brand": "Merk",
             "date": "Uitgavedatum",
+            "delete": "Verwijder",
             "text": "U heeft op het moment geen spelcomputers"
         },
         "form": {
@@ -35,7 +36,14 @@
             "brand": "Merk",
             "date": "datum",
             "add": "spelcomputers toe",
-            "cancel": "Annuleren"
+            "cancel": "Annuleren",
+            "error": {
+                "price": "Prijs is verplicht.",
+                "name": "Naam is verplicht.",
+                "version": "Versie is verplicht.",
+                "brand": "Merk is verplicht.",
+                "date": "Uitgavedatum is verplicht."
+            }
         }
     },
     "login": {

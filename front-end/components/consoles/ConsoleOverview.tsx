@@ -11,6 +11,7 @@ type Props = {
 };
 
 const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) => {
+  const { t } = useTranslation();
   return (
     <>
       {consoles && (
@@ -18,11 +19,11 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Price</th>
-              <th scope="col">Name</th>
-              <th scope="col">Version</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Release date</th>
+              <th scope="col">{t("consoles.table.price")}</th>
+              <th scope="col">{t("consoles.table.name")}</th>
+              <th scope="col">{t("consoles.table.version")}</th>
+              <th scope="col">{t("consoles.table.brand")}</th>
+              <th scope="col">{t("consoles.table.date")}</th>
             </tr>
           </thead>
           <tbody>
@@ -42,13 +43,13 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                   <td
                       onClick={() => onDeleteConsole(console)}
                     >
-                      <p>Delete</p>
+                      <p>{t("consoles.table.delete")}</p>
                     </td>
                 </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={6}>You currently don't have consoles</td>
+              <td colSpan={6}>{t("consoles.table.text")}</td>
             </tr>
           )}
           </tbody>
