@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const Language: React.FC = () => {
+  
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { locale, pathname, asPath, query } = router;
 
@@ -13,7 +16,7 @@ const Language: React.FC = () => {
   return (
     <div className="ml-6">
       <label htmlFor="language" className="text-white">
-        Language
+      {t('language')}
       </label>
       <select
         id="language"

@@ -1,11 +1,13 @@
 {
+    "language": "Taal",
     "app.title": "De GameLib",
     "app.welcome": "Welkom!",
+    "app.text": "een bibliotheek om bij te houden welke spelcomputers en games dat jij bezit.",
     "header": {
         "title": "De GameLib",
         "nav": {
             "home": "Start Pagina",
-            "Users": "Gebruikers",
+            "users": "Gebruikers",
             "consoles": "Spelcomputers",
             "games": "Games",
             "reviews": "Reviews",

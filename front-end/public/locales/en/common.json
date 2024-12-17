@@ -1,11 +1,13 @@
 {
+    "language": "Language",
     "app.title": "The GameLib",
     "app.welcome": "Welcome!",
+    "app.text": "A library to keep track of the consoles and games that you own.",
     "header": {
         "title": "The GameLib",
         "nav": {
             "home": "Home",
-            "Users": "Users",
+            "users": "Users",
             "consoles": "Consoles",
             "games": "Games",
             "reviews": "Reviews",

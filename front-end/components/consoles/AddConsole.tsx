@@ -1,6 +1,8 @@
 import ConsoleService from '@/services/ConsoleService';
 import { Console } from '@/types';
 import React, { useState } from 'react';
+import Language from "@/components/language/Language";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   toggleForm: () => void;

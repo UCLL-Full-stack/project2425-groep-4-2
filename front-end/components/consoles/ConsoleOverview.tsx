@@ -2,6 +2,8 @@ import { Console } from '@/types';
 import React from 'react';
 import AddConsole from './AddConsole';
 import ConsoleService from '@/services/ConsoleService';
+import Language from "@/components/language/Language";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   consoles: Array<Console>;

@@ -5,6 +5,8 @@ import ConsoleService from "@/services/ConsoleService";
 import { Console } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Language from "@/components/language/Language";
+import { useTranslation } from "next-i18next";
 
 const Consoles: React.FC = () => {
     const [consoles, setConsoles] = useState<Array <Console>>([]) ;
