@@ -1,8 +1,23 @@
 import Link from 'next/link';
 import Language from './language/Language';
 import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
+  const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
+
+  useEffect(() => {
+    const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    if(userString){
+      setLoggedInUser(userString.name);
+    }
+  }, []);
+
+  const handleClick = () => {
+    localStorage.removeItem("loggedInUser");
+    setLoggedInUser(null);
+  };
+
   const { t } = useTranslation('common');
   return (
     <header className="p-3 mb-3 border-bottom bg-dark bg-gradient">
@@ -26,6 +41,28 @@ const Header: React.FC = () => {
         <Link href="/reviews" className="nav-link px-4 fs-5 text-white">
         {t('header.nav.reviews')}
         </Link>
+        {!loggedInUser && (
+          <Link
+            href="/login"
+            className="nav-link px-4 fs-5 text-white"
+          >
+            {t('header.nav.login')}
+          </Link>
+        )}
+        {loggedInUser && (
+          <a
+            href="/login"
+            onClick={handleClick}
+            className="nav-link px-4 fs-5 text-white"
+          >
+            {t('header.nav.logout')}
+          </a>
+        )}
+        {loggedInUser && (
+          <div className="nav-link px-4 fs-5 text-white">
+            {t('header.welcome')}, {loggedInUser}!
+          </div>
+        )}
         {
           <Language/>
         }

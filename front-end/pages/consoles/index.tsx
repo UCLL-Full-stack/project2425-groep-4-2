@@ -11,9 +11,18 @@ import { useTranslation } from "next-i18next";
 const Consoles: React.FC = () => {
     const [consoles, setConsoles] = useState<Array <Console>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [error, setError] = useState<string>();
 
     const getConsoles = async () => {
         const response = await ConsoleService.getAllConsoles();
+        if(!response.ok){
+            if(response.status === 401){
+                setError("You are not authorized for this page. Please login first.");
+            }
+            else{
+                setError(response.statusText);
+            }
+        }
         const json = await response.json();
         setConsoles(json);
     };
@@ -52,8 +61,9 @@ const Consoles: React.FC = () => {
         </button>
                 <h2>Consoles overview</h2>
                 <section>
+                {error && <div className="text-red-800">{error}</div>}
                     {
-                    consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
+                    !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
                     }
                 </section>
                 {isFormOpen && (

@@ -10,9 +10,18 @@ import { useEffect, useState } from "react";
 const Games: React.FC = () => {
     const [games, setGames] = useState<Array <Game>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [error, setError] = useState<string>();
 
     const getGames = async () => {
         const response = await GameService.getAllGames();
+        if(!response.ok){
+            if(response.status === 401){
+                setError("You are not authorized for this page. Please login first.");
+            }
+            else{
+                setError(response.statusText);
+            }
+        }
         const json = await response.json();
         setGames(json);
     };
@@ -51,8 +60,9 @@ const Games: React.FC = () => {
         </button>
                 <h2>Games overview</h2>
                 <section>
+                {error && <div className="text-red-800">{error}</div>}
                     {
-                    games && <GameOverview games={games} onDeleteGame={handleDeleteGame} />
+                    !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} />
                     }
                 </section>
                 {isFormOpen && (

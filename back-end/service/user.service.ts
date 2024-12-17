@@ -1,28 +1,47 @@
 import bcrypt from 'bcrypt';
 import userDb from '../repository/user.db';
 import { User } from '../model/user';
-import { UserInput } from '../types';
+import { AuthenticationResponse, UserInput } from '../types';
+import { generateJwtToken } from '../util/jwt';
+import reviewerService from './reviewer.service';
 
 const getAllUsers = async (): Promise<User[]> => userDb.getAllUsers();
 
-/*
-const authenticate = async ({ username, password }: UserInput): Promise<AuthenticationResponse> => {
-    const user = await getUserByUsername({ username });
+const getUserByName = async ({ name }: { name: string }): Promise<User> => {
+    const user = await userDb.getUserByName({ name });
+    if (!user) {
+        throw new Error(`User with name: ${name} does not exist.`);
+    }
+    return user;
+};
+
+const authenticate = async ({ name, password }: UserInput): Promise<AuthenticationResponse> => {
+    const user = await getUserByName({ name });
+
+    console.log(password);
 
     const isValidPassword = await bcrypt.compare(password, user.getPassword());
 
     if (!isValidPassword) {
         throw new Error('Incorrect password.');
     }
+
+    let reviewer;
+
+    if(user.getRole() === 'reviewer'){
+        reviewer = await reviewerService.getReviewerByUserId(user.getId() || 0);
+    }
+
     return {
-        token: generateJwtToken({ username, role: user.getRole() }),
-        username: username,
-        fullname: `${user.getFirstName()} ${user.getLastName()}`,
+        token: generateJwtToken({ name, role: user.getRole(), id: user.getId() || 20, reviewerId: reviewer?.getId() || 0 }),
+        name: name,
         role: user.getRole(),
+        id: user.getId() || 20,
+        reviewerId: reviewer?.getId() || 0,
     };
 };
 
-*/
+
 
 const getUserById = async(id: number): Promise<User> => {
     const user = await userDb.getUserById({id});
@@ -77,4 +96,4 @@ const updateUserBlacklist = async ({
 }
 
 
-export default { getAllUsers, createUser, getUserById, updateUserBlacklist };
+export default { getAllUsers, createUser, getUserById, updateUserBlacklist, authenticate };

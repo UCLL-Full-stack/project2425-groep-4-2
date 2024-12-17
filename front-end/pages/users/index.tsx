@@ -7,9 +7,18 @@ import { useEffect, useState } from "react";
 
 const Users: React.FC = () => {
     const [users, setUsers] = useState<Array <User>>([]) ;
+    const [error, setError] = useState<string>();
 
     const getUsers = async () => {
         const response = await UserService.getAllUsers();
+        if(!response.ok){
+            if(response.status === 401){
+                setError("You are not authorized for this page. Please login first.");
+            }
+            else{
+                setError(response.statusText);
+            }
+        }
         const json = await response.json();
         setUsers(json);
     };
@@ -35,8 +44,9 @@ const Users: React.FC = () => {
                 <h1>Users</h1>
                 <h2>Users overview</h2>
                 <section>
+                    {error && <div className="text-red-800">{error}</div>}
                     {
-                    users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
+                    !error && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
                 </section>
             </main>

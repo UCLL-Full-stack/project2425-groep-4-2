@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [error, setError] = useState<string>();
 
     /*
     const extractAllReviews = (data: ReviewData[]): Review[] => {
@@ -26,6 +27,14 @@ const Reviews: React.FC = () => {
     const getReviews = async () => {
         const response = await ReviewService.getAllReviews();
         const json = await response.json();
+        if(!response.ok){
+          if(response.status === 401){
+              setError("You are not authorized for this page. Please login first.");
+          }
+          else{
+              setError(response.statusText);
+          }
+      }
         //const allReviews = extractAllReviews(json);
         setReviews(json);
     };
@@ -64,8 +73,9 @@ const Reviews: React.FC = () => {
         </button>
                 <h2>Reviews overview</h2>
                 <section>
+                {error && <div className="text-red-800">{error}</div>}
                     {
-                    reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
+                    !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
                 </section>
                 {isFormOpen && (

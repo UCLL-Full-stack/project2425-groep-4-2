@@ -1,10 +1,12 @@
 import { Console } from "@/types";
 
 const getAllConsoles = async () => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
   return await fetch(process.env.NEXT_PUBLIC_API_URL + '/consoles', {
     method: 'GET',
     headers:{
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   })
 };

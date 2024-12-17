@@ -9,4 +9,10 @@ const getReviewerById = async (id: number): Promise<Reviewer> => {
     return reviewer;
 };
 
-export default { getAllReviewers, getReviewerById };
+const getReviewerByUserId = async (userId: number): Promise<Reviewer> => {
+    const reviewer = await reviewerDb.getReviewerByUserId({ userId });
+    if (!reviewer) throw new Error(`Reviewer with id ${userId} does not exist.`);
+    return reviewer;
+};
+
+export default { getAllReviewers, getReviewerById, getReviewerByUserId };

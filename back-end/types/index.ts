@@ -44,6 +44,14 @@ type GameInput = {
     developer: string;
 }
 
+type AuthenticationResponse = {
+    token: string;
+    name: string;
+    role: string;
+    id: number;
+    reviewerId: number;
+};
+
 export {
     UserInput,
     Role,
@@ -51,4 +59,5 @@ export {
     ConsoleInput,
     ReviewInput,
     GameInput,
+    AuthenticationResponse,
 };

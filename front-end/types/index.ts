@@ -1,12 +1,13 @@
 export type User = {
-    id: number;
-    name: string;
-    email: string;
-    dateOfBirth: Date;
-    blacklisted: boolean;
+    id?: number;
+    name?: string;
+    email?: string;
+    dateOfBirth?: Date;
+    blacklisted?: boolean;
     role?: "normal";
-    consoles: Console[];
-    password: string;
+    consoles?: Console[];
+    password?: string;
+    reviewerId?: number;
   };
 
   export type Reviewer = {
@@ -47,3 +48,8 @@ export type ReviewData = {
   reviews: Review[]; 
   user: User; 
 }
+
+export type StatusMessage = {
+  message: string;
+  type: "error" | "success";
+};

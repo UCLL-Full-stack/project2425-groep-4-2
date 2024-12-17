@@ -29,6 +29,22 @@ const getReviewerById = async ({ id }: { id: number }): Promise<Reviewer | null>
     }
 };
 
+const getReviewerByUserId = async ({ userId }: { userId: number }): Promise<Reviewer | null> => {
+    try {
+        const reviewerPrisma = await database.reviewer.findUnique({
+            where: { userId },
+            include: {reviews: {include: {game: true}}, user: {include: {consoles: {include: {games: true}}}}},
+        });
+
+        if (!reviewerPrisma) { return null; }
+
+        return Reviewer.from(reviewerPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 const createReviewer = async (reviewer: Reviewer): Promise<Reviewer> => {
     try {
         const userId = reviewer.getUser().getId(); if (userId === undefined) { throw new Error("User ID is undefined."); }
@@ -58,4 +74,5 @@ export default {
     getAllReviewers,
     getReviewerById,
     createReviewer,
+    getReviewerByUserId,
 };
