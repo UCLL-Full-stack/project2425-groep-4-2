@@ -23,10 +23,12 @@ const getUserById = (userId: string) => {
 }
 
 export const updateBlacklistStatus = async (user: User) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
   const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/users/${user.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(user),
   });

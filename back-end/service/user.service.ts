@@ -18,7 +18,6 @@ const getUserByName = async ({ name }: { name: string }): Promise<User> => {
 const authenticate = async ({ name, password }: UserInput): Promise<AuthenticationResponse> => {
     const user = await getUserByName({ name });
 
-    console.log(password);
 
     const isValidPassword = await bcrypt.compare(password, user.getPassword());
 
@@ -33,11 +32,12 @@ const authenticate = async ({ name, password }: UserInput): Promise<Authenticati
     }
 
     return {
-        token: generateJwtToken({ name, role: user.getRole(), id: user.getId() || 20, reviewerId: reviewer?.getId() || 0 }),
+        token: generateJwtToken({ name, role: user.getRole(), id: user.getId() || 20, reviewerId: reviewer?.getId() || 0, blacklisted: user.getBlacklisted() }),
         name: name,
         role: user.getRole(),
         id: user.getId() || 20,
         reviewerId: reviewer?.getId() || 0,
+        blacklisted: user.getBlacklisted(),
     };
 };
 

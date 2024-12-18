@@ -62,6 +62,7 @@ const UserLoginForm: React.FC = () => {
           role: user.role,
           id: user.id,
           reviewerId: user.reviewerId,
+          blacklisted: user.blacklisted,
         })
       )
     }

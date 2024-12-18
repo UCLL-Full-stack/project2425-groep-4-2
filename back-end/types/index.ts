@@ -55,6 +55,7 @@ type AuthenticationResponse = {
     role: string;
     id: number;
     reviewerId: number;
+    blacklisted: boolean;
 };
 
 export {

@@ -169,7 +169,6 @@ consoleRouter.delete('/:id', async (req: Request, res: Response, next: NextFunct
 consoleRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try{
     const consoleGame = <ConsoleGameInput>req.body;
-    console.log(consoleGame);
     const updatedConsole = await consoleService.addGameToConsole(consoleGame);
 
     res.status(200).json(updatedConsole);
