@@ -24,7 +24,7 @@ test('given: valid values for game, when: game is created, then: game is created
     expect(game.getDeveloper()).toEqual(validDeveloper);
 });
 
-test('given: name is invalid, when: console is created, then: an error is thrown', () => {
+test('given: name is invalid, when: game is created, then: an error is thrown', () => {
     // given
     const invalidName = '';
 
@@ -42,7 +42,7 @@ test('given: name is invalid, when: console is created, then: an error is thrown
     expect(game).toThrow('Name is required');
 });
 
-test('given: genre is invalid, when: console is created, then: an error is thrown', () => {
+test('given: genre is invalid, when: game is created, then: an error is thrown', () => {
     // given
     const invalidGenre = '';
 
@@ -60,7 +60,7 @@ test('given: genre is invalid, when: console is created, then: an error is throw
     expect(game).toThrow('Genre is required');
 });
 
-test('given: developer is invalid, when: console is created, then: an error is thrown', () => {
+test('given: developer is invalid, when: game is created, then: an error is thrown', () => {
     // given
     const invalidDeveloper = '';
 

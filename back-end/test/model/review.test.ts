@@ -25,7 +25,7 @@ test('given: valid values for review, when: review is created, then: review is c
     expect(review.getReviewerId()).toEqual(validReviewerId);
 });
 
-test('given: stars is invalid, when: console is created, then: an error is thrown', () => {
+test('given: stars is invalid, when: review is created, then: an error is thrown', () => {
     // given
     const invalidStars = 0;
 
@@ -43,7 +43,7 @@ test('given: stars is invalid, when: console is created, then: an error is throw
     expect(review).toThrow('Stars is required');
 });
 
-test('given: description is invalid, when: console is created, then: an error is thrown', () => {
+test('given: description is invalid, when: review is created, then: an error is thrown', () => {
     // given
     const invalidDescription = '';
 
@@ -61,7 +61,7 @@ test('given: description is invalid, when: console is created, then: an error is
     expect(review).toThrow('Description is required');
 });
 
-// test('given: game is invalid, when: console is created, then: an error is thrown', () => {
+// test('given: game is invalid, when: review is created, then: an error is thrown', () => {
 //     // given
 //     const invalidGame = undefined;
 
@@ -79,7 +79,7 @@ test('given: description is invalid, when: console is created, then: an error is
 //     expect(review).toThrow('Game is required');
 // });
 
-test('given: reviewer id is invalid, when: console is created, then: an error is thrown', () => {
+test('given: reviewer id is invalid, when: review is created, then: an error is thrown', () => {
     // given
     const invalidReviewerId = 0;
 
