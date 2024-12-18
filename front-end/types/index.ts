@@ -37,6 +37,7 @@ export type Game = {
 
 export type Review = {
   id?: number;
+  game?: Game;
   stars: number;
   description: string;
   gameId : number;

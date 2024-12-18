@@ -34,18 +34,30 @@ const AddConsole: React.FC<Props> = ({toggleForm, onAddConsole}) => {
       alert(t("consoles.form.error.date"))
     }
 
-    const newConsole: Console = {
-      userId: 19,
-      price,
-      name,
-      version,
-      brand,
-      releaseDate,
-      games: [],
+    
+    const userString = localStorage.getItem('loggedInUser');
+
+    let loggedInUserId: number;
+
+    if (userString) {
+      const userObject = JSON.parse(userString);
+      loggedInUserId = userObject.id;
+    
+      const newConsole: Console = {
+        userId: loggedInUserId,
+        price,
+        name,
+        version,
+        brand,
+        releaseDate,
+        games: [],
+      }
+      await ConsoleService.addConsole(newConsole);
+      onAddConsole(newConsole);
+      toggleForm();  
+    } else {
+      console.log('No logged in user');
     }
-    await ConsoleService.addConsole(newConsole);
-    onAddConsole(newConsole);
-    toggleForm();
   }
   
   return (

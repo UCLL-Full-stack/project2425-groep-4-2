@@ -12,10 +12,12 @@ const getAllConsoles = async () => {
 };
 
 const addConsole = async (console: Console) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
     return await fetch(process.env.NEXT_PUBLIC_API_URL + '/consoles', {
         method: 'POST',
         headers:{
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(console)
     })

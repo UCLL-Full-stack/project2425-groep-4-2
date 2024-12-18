@@ -1,6 +1,6 @@
 import { Review, } from '@/types';
 import React from 'react';
-import AddReview from './AddReview';
+import AddReview from '../games/AddReview';
 import ReviewService from '@/services/ReviewService';
 
 type Props = {
@@ -27,7 +27,7 @@ const ReviewOverview: React.FC<Props> = ({ reviews, onDeleteReview }: Props) => 
               reviews.map((review, index) => (
                 <tr key={index}>
                   <td>{review.id}</td>
-                  <td>{review.game.name}</td>
+                  <td>{review.game?.name}</td>
                   <td>{review.stars}</td>
                   <td>{review.description}</td>
                   <td>{review.reviewerId}</td>

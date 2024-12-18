@@ -12,10 +12,12 @@ const getAllGames = async () => {
 };
 
 const addGame = async (game: Game) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
     return await fetch(process.env.NEXT_PUBLIC_API_URL + '/games', {
         method: 'POST',
         headers:{
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(game)
     })
