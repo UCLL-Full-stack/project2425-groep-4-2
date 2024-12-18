@@ -33,10 +33,22 @@ const deleteConsole = async (consoleId: number) => {
   });
 };
 
+const getConsoleById = async (consoleId: string) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
+  return await fetch(process.env.NEXT_PUBLIC_API_URL + `/consoles/${consoleId}`, {
+    method: 'GET',
+    headers:{
+      'Content-Type' : 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+};
+
 const ConsoleService = {
   getAllConsoles,
   addConsole,
   deleteConsole,
+  getConsoleById,
 };
 
 export default ConsoleService;

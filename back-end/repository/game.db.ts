@@ -16,6 +16,7 @@ const getGameById = async ({ id }: { id: number }): Promise<Game | null> => {
     try {
         const gamePrisma = await database.game.findUnique({
             where: { id },
+            include: {consoles: true},
         });
 
         if (!gamePrisma) { return null; }

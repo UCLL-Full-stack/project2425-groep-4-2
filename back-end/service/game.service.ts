@@ -3,11 +3,12 @@ import gameDb from '../repository/game.db';
 import { GameInput } from '../types';
 
 const getAllGames = (): Promise<Game[]> => gameDb.getAllGames();
+
 /*
-const getConsoleById = (id: number): Console => {
-    const console = consoleDb.getConsoleById({ id });
-    if (!console) throw new Error(`Console with id ${id} does not exist.`);
-    return console;
+const getGameById = (id: number): Game => {
+    const game = gameDb.getGameById({ id });
+    if (!game) throw new Error(`Console with id ${id} does not exist.`);
+    return game;
 };
 */
 

@@ -33,10 +33,22 @@ const deleteGame = async (gameId: number) => {
   });
 };
 
+const getGameById = async (gameId: number) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
+  return await fetch(process.env.NEXT_PUBLIC_API_URL + `/games/${gameId}`, {
+    method: 'GET',
+    headers:{
+      'Content-Type' : 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+};
+
 const GameService = {
   getAllGames,
   addGame,
   deleteGame,
+  getGameById,
 };
 
 export default GameService;
