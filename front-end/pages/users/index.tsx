@@ -8,6 +8,16 @@ import { useEffect, useState } from "react";
 const Users: React.FC = () => {
     const [users, setUsers] = useState<Array <User>>([]) ;
     const [error, setError] = useState<string>();
+    const [roleError, setRoleError] = useState<string>("You don't have the privileges to acces this page.");
+
+    const [loggedInUserRole, setLoggedInUserRole] = useState<String | null>(null);
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserRole(userString.role);
+      }
+    }, []);
 
     const getUsers = async () => {
         const response = await UserService.getAllUsers();
@@ -46,8 +56,9 @@ const Users: React.FC = () => {
                 <section>
                     {error && <div className="text-red-800">{error}</div>}
                     {
-                    !error && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
+                    loggedInUserRole === 'admin' && !error && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
+                    {loggedInUserRole !== 'admin' && <div className="text-red-800">{roleError}</div>}
                 </section>
             </main>
         </>

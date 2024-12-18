@@ -1,6 +1,4 @@
-import UserService from '@/services/UserService';
 import { User } from '@/types';
-import React from 'react';
 
 type Props = {
   users: Array<User>;
