@@ -1,19 +1,25 @@
 import ReviewService from '@/services/ReviewService';
-import { Review} from '@/types';
+import { Game, Review} from '@/types';
 import { release } from 'os';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   toggleForm: () => void;
   onAddReview: (review: Review) => void;
+  game?: Game;
+
 };
 
-const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
-  const [id, setId] = useState<number | undefined>()
+const AddReview: React.FC<Props> = ({toggleForm, onAddReview, game}) => {
   const [stars, setStars] = useState<number>(1)
   const [description, setDescription] = useState('')
-  const [gameId, setGameId] = useState<number>(19)
-  const [reviewerId, setReviewerId] = useState<number>(7)
+  const [gameId, setGameId] = useState<number | undefined>(undefined)
+
+  useEffect(() => {
+    if (game && game.id) {
+      setGameId(game.id);
+    }
+  }, [game]);
 
   const handleAddReview = async () => {
     if (!stars) {
@@ -26,27 +32,28 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
       alert("Game id is required")
     }
 
-    const newReview: Review = {
-      stars,
-      description,
-      gameId,
-      reviewerId,
+    const userString = localStorage.getItem('loggedInUser');
+
+    let loggedInReviewerId: number;
+    if(userString){
+      const userObject = JSON.parse(userString);
+      loggedInReviewerId = userObject.reviewerId;
+
+      const newReview: Review = {
+        stars,
+        description,
+        gameId: gameId ?? 0,
+        reviewerId: loggedInReviewerId,
+      }
+      await ReviewService.addReview(newReview);
+      onAddReview(newReview);
+      toggleForm();
     }
-    await ReviewService.addReview(newReview);
-    onAddReview(newReview);
-    toggleForm();
   }
   
   return (
     <>
     <form style={{display: 'grid'}}>
-      <label>Game id</label>
-        <input
-          type='number'
-          className="border p-2 mb-4 w-full"
-          value={gameId}
-          onChange={(value) => setGameId(value.target.valueAsNumber)}
-        />
       <label>Stars</label>
       <select
           className="border p-3 mb-4 w-full rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -64,13 +71,6 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview}) => {
           className="border p-2 mb-4 w-full"
           value={description}
           onChange={(value) => setDescription(value.target.value)}
-        />
-        <label>reviewer</label>
-        <input
-          type='number'
-          className="border p-2 mb-4 w-full"
-          value={reviewerId}
-          onChange={(value) => setReviewerId(value.target.valueAsNumber)}
         />
       <div>  
       <button

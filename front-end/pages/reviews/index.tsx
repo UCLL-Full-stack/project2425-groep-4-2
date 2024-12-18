@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
-    const [isFormOpen, setIsFormOpen] = useState(false);
     const [error, setError] = useState<string>();
 
     /*
@@ -39,11 +38,6 @@ const Reviews: React.FC = () => {
         setReviews(json);
     };
 
-    const handleAddReview = async () => {
-        getReviews();
-        setIsFormOpen(false);
-      };
-
     const handleDeleteReview = async (review: Review) => {
         if (review.id) {
             await ReviewService.deleteReview(review.id);
@@ -63,14 +57,6 @@ const Reviews: React.FC = () => {
             <Header />
             <main className="d-flex flex-column justify-content-center align-items-center">
                 <h1>Reviews</h1>
-                <button
-                    className="mt-6 rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
-                    onClick={() => setIsFormOpen(true)}
-                >
-                    <span
-            className="text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
-          >Add Review</span>
-        </button>
                 <h2>Reviews overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
@@ -78,12 +64,6 @@ const Reviews: React.FC = () => {
                     !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
                 </section>
-                {isFormOpen && (
-          <AddReview
-            toggleForm={() => setIsFormOpen(false)}
-            onAddReview={handleAddReview}
-          />
-        )}
             </main>
         </>
     );

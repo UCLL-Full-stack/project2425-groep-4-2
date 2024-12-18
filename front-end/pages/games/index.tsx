@@ -2,6 +2,7 @@
 import AddGame from "@/components/games/AddGame";
 import GameOverview from "@/components/games/GameOverview";
 import Header from "@/components/header";
+import AddReview from "@/components/reviews/AddReview";
 import GameService from "@/services/GameService";
 import { Game } from "@/types";
 import Head from "next/head";
@@ -11,6 +12,8 @@ const Games: React.FC = () => {
     const [games, setGames] = useState<Array <Game>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [error, setError] = useState<string>();
+    const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
+    const [selectedGame, setSelectedGame] = useState<Game>();
 
     const getGames = async () => {
         const response = await GameService.getAllGames();
@@ -38,6 +41,15 @@ const Games: React.FC = () => {
         }
     }
 
+    const handleReviewForm = async (game: Game) => {
+        setIsReviewFormOpen(true)
+        setSelectedGame(game);
+    }
+
+    const handleAddReview = async () => {
+        
+    }
+
     useEffect(() => {
         getGames();
     }, []);
@@ -62,13 +74,21 @@ const Games: React.FC = () => {
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
                     {
-                    !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} />
+                    !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />
                     }
                 </section>
                 {isFormOpen && (
           <AddGame
             toggleForm={() => setIsFormOpen(false)}
             onAddGame={handleAddGame}
+          />
+        )} 
+
+        {isReviewFormOpen && (
+          <AddReview
+            toggleForm={() => setIsReviewFormOpen(false)}
+            onAddReview={handleAddReview}
+            game={selectedGame}
           />
         )} 
             </main>

@@ -12,10 +12,12 @@ const getAllReviews = async () => {
 };
 
 const addReview = async (review: Review) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
     return await fetch(process.env.NEXT_PUBLIC_API_URL + '/reviews', {
         method: 'POST',
         headers:{
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(review)
     })

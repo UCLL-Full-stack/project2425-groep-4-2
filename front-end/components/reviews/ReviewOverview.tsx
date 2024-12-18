@@ -1,6 +1,5 @@
 import { Review, } from '@/types';
 import React from 'react';
-import AddReview from '../games/AddReview';
 import ReviewService from '@/services/ReviewService';
 
 type Props = {

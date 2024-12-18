@@ -6,9 +6,10 @@ import GameService from '@/services/GameService';
 type Props = {
   games: Array<Game>;
   onDeleteGame: (game: Game) => void;
+  onAddReview: (game: Game) => void;
 };
 
-const GameOverview: React.FC<Props> = ({ games, onDeleteGame }: Props) => {
+const GameOverview: React.FC<Props> = ({ games, onDeleteGame, onAddReview }: Props) => {
   return (
     <>
       {games && (
@@ -39,6 +40,16 @@ const GameOverview: React.FC<Props> = ({ games, onDeleteGame }: Props) => {
                       onClick={() => onDeleteGame(game)}
                     >
                       <p>Delete</p>
+                    </td>
+                    <td>
+                    <button
+                    className="mt-6 rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
+                    onClick={() => onAddReview(game)}
+                    >
+                    <span
+            className="text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
+          >Add Review</span>
+        </button>
                     </td>
                 </tr>
             ))
