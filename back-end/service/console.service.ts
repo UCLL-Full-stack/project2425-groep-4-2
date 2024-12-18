@@ -1,6 +1,6 @@
 import { Console } from '../model/console';
 import consoleDb from '../repository/console.db';
-import { ConsoleInput } from '../types';
+import { ConsoleGameInput, ConsoleInput } from '../types';
 
 const getAllConsoles = (): Promise<Console[]> => consoleDb.getAllConsoles();
 
@@ -12,6 +12,12 @@ const getConsoleById = async( id: number): Promise<Console> => {
     }
 
     return console;
+}
+
+const addGameToConsole = async({ consoleId, gameId }: ConsoleGameInput): Promise<Console | null> =>{
+    const updatedConsole = await consoleDb.addGameToConsole(consoleId, gameId);
+
+    return updatedConsole;
 }
 
 
@@ -32,4 +38,4 @@ const createConsole = async ({
     return await consoleDb.createConsole(console);
 };
 
-export default { getAllConsoles, createConsole, getConsoleById, };
+export default { getAllConsoles, createConsole, getConsoleById, addGameToConsole, };

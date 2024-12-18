@@ -44,6 +44,11 @@ type GameInput = {
     developer: string;
 }
 
+type ConsoleGameInput = {
+    consoleId: number,
+    gameId: number,
+}
+
 type AuthenticationResponse = {
     token: string;
     name: string;
@@ -59,5 +64,6 @@ export {
     ConsoleInput,
     ReviewInput,
     GameInput,
+    ConsoleGameInput,
     AuthenticationResponse,
 };

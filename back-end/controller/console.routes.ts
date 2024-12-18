@@ -32,7 +32,7 @@
 
 import express, { NextFunction, Request, Response } from 'express';
 import consoleService from '../service/console.service';
-import { ConsoleInput } from '../types';
+import { ConsoleGameInput, ConsoleInput } from '../types';
 
 const consoleRouter = express.Router();
 
@@ -165,4 +165,16 @@ consoleRouter.delete('/:id', async (req: Request, res: Response, next: NextFunct
     }
 });
 */
+
+consoleRouter.put('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try{
+    const consoleGame = <ConsoleGameInput>req.body;
+    console.log(consoleGame);
+    const updatedConsole = await consoleService.addGameToConsole(consoleGame);
+
+    res.status(200).json(updatedConsole);
+    }catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
+});
 export { consoleRouter };

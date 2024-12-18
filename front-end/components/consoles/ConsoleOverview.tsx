@@ -1,9 +1,10 @@
-import { Console } from '@/types';
-import React from 'react';
+import { Console, ConsoleGame, Game } from '@/types';
+import React, { useEffect, useState } from 'react';
 import AddConsole from './AddConsole';
 import ConsoleService from '@/services/ConsoleService';
 import Language from "@/components/language/Language";
 import { useTranslation } from "next-i18next";
+import GameService from '@/services/GameService';
 
 type Props = {
   consoles: Array<Console>;
@@ -11,6 +12,43 @@ type Props = {
 };
 
 const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) => {
+  const [selectedConsole, setSelectedConsole] = useState<Console>();
+  const [showGames, setShowGames] = useState(false);
+  const [error, setError] = useState<string>();
+  const [games, setGames] = useState<Array <Game>>([]) ;
+
+  const getGames = async () => {
+    const response = await GameService.getAllGames();
+    if(!response.ok){
+        if(response.status === 401){
+            setError("You are not authorized for this page. Please login first.");
+        }
+        else{
+            setError(response.statusText);
+        }
+    }
+    const json = await response.json();
+    setGames(json);
+};
+
+  const handleAddGame = async (gameId?: number) =>{
+    setShowGames(false);
+    const newConsoleGame: ConsoleGame = {
+      consoleId: selectedConsole?.id,
+      gameId,
+    }
+    await ConsoleService.addGameToConsole(newConsoleGame);
+  }
+
+  const handleShowGames = async (console: Console) =>{
+    setSelectedConsole(console);
+    setShowGames(true);
+  }
+
+  useEffect(() => {
+          getGames();
+      }, []);
+
   const { t } = useTranslation();
   return (
     <>
@@ -29,7 +67,7 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
           <tbody>
             {consoles.length > 0 ? (
               consoles.map((console, index) => (
-                <tr key={index}>
+                <tr key={index} onClick={() => handleShowGames(console)}>
                   <td>{console.id}</td>
                   <td>{console.price}</td>
                   <td>{console.name}</td>
@@ -47,7 +85,6 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                     </td>
                     <td className='text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300'>
                     <a href={`/consoles/${console.id}`} >View games for console</a>
-                      
                     </td>
                 </tr>
             ))
@@ -56,6 +93,52 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
               <td colSpan={6}>{t("consoles.table.text")}</td>
             </tr>
           )}
+          {
+            showGames && (
+              <table className="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Developer</th>
+                    <th scope="col">Release date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {games.length > 0 ? (
+                    games.map((game, index) => (
+                      <tr key={index}>
+                        <td>{game.id}</td>
+                        <td>{game.name}</td>
+                        <td>{game.genre}</td>
+                        <td>{game.developer}</td>
+                        <td>
+                          {game.releaseDate
+                          ? new Date(game.releaseDate).toLocaleDateString('en-GB') 
+                          : "N/A"}
+                        </td>
+                        <td>
+                    <button
+                    className="mt-6 rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
+                    onClick={() => handleAddGame(game.id)}
+                    >
+                    <span
+            className="text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
+          >Add game to console</span>
+        </button>
+                    </td>
+                      </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={6}>You currently don't have games</td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
+            )
+          }
           </tbody>
         </table>
       )}

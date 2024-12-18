@@ -50,6 +50,11 @@ export type ReviewData = {
   user: User; 
 }
 
+export type ConsoleGame = {
+  consoleId?: number;
+  gameId?: number;
+}
+
 export type StatusMessage = {
   message: string;
   type: "error" | "success";

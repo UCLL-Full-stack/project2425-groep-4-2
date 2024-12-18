@@ -1,4 +1,4 @@
-import { Console } from "@/types";
+import { Console, ConsoleGame } from "@/types";
 
 const getAllConsoles = async () => {
   const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
@@ -21,6 +21,19 @@ const addConsole = async (console: Console) => {
         },
         body: JSON.stringify(console)
     })
+}
+
+export const addGameToConsole = async (consoleGame: ConsoleGame) => {
+  console.log(consoleGame);
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
+  const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/consoles/${consoleGame.consoleId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(consoleGame),
+  });
 }
 
 const deleteConsole = async (consoleId: number) => {
@@ -49,6 +62,7 @@ const ConsoleService = {
   addConsole,
   deleteConsole,
   getConsoleById,
+  addGameToConsole,
 };
 
 export default ConsoleService;

@@ -56,9 +56,32 @@ const createConsole = async (consoleT: Console): Promise<Console> => {
     }
 };
 
+const addGameToConsole = async (consoleId: number, gameId: number): Promise<Console | null> => {
+    try {
+        const updatedConsole = await database.console.update({
+            where: { id: consoleId },
+            data: {
+                games: {
+                    connect: {
+                        id: gameId,
+                    },
+                },
+            },
+            include: {
+                games: true,
+            },
+        });
+        return Console.from(updatedConsole);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 
 export default {
     getAllConsoles,
     getConsoleById,
     createConsole,
+    addGameToConsole,
 };
