@@ -22,6 +22,41 @@ const Home: React.FC = () => {
           <h1>{t("app.welcome")}</h1>
         </span>
 
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Password</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+              <td>admin</td>
+              <td>admin123</td>
+              <td>admin</td>
+          </tbody>
+          <tbody>
+              <td>Kevin</td>
+              <td>kevin123</td>
+              <td>Reviewer</td>
+          </tbody>
+          <tbody>
+              <td>Harry</td>
+              <td>harry123</td>
+              <td>Normal</td>
+          </tbody>
+          <tbody>
+              <td>reviewer</td>
+              <td>reviewer123</td>
+              <td>Reviewer</td>
+          </tbody>
+          <tbody>
+              <td>normal</td>
+              <td>normal123</td>
+              <td>Normal</td>
+          </tbody>
+        </table>
+
         <div className={styles.description}>
           <p>
           {t("app.text")}

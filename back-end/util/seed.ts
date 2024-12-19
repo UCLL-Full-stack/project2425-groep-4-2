@@ -82,6 +82,35 @@ const main = async () => {
         },
     });
 
+    const reviewer2 = await prisma.reviewer.create({
+        data: {
+            user: {
+                create: {
+                    name: 'reviewer',
+                    password: await bcrypt.hash('reviewer123', 12),
+                    dateOfBirth: set(new Date(), { hours: 10, minutes: 45 }),
+                    blacklisted: false,
+                    email: 'reviewer@gamelib.be',
+                    role: 'reviewer',
+                },
+            },
+        },
+        include: {
+            user: true,
+        },
+    });
+
+    const normalUser2 = await prisma.user.create({
+        data: {
+            name: 'normal',
+            password: await bcrypt.hash('normal123', 12),
+            dateOfBirth: set(new Date(), { hours: 10, minutes: 45 }),
+            blacklisted: false,
+            email: 'normal@gamelib.be',
+            role: 'normal',
+        },
+    });
+
     const playstation = await prisma.console.create({
         data: {
             price: 699,
