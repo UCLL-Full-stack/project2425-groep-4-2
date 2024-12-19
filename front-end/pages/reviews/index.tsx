@@ -83,7 +83,6 @@ const Reviews: React.FC = () => {
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
                 {statusError && <div className="text-red-800">{statusError}</div>}
-                {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
