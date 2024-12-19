@@ -12,6 +12,7 @@ project:
 ? userid in addconsole zou moeten de user zijn die het gebruikt ?
 ? games zouden mischien een colomn moeten hebben van de consoles(ook aanwezig in add games) ?
 ? id's in add forms verwijderen (auto asign) ?
+alles wat met useeffect is gedaan buiten inlezen van local en sesion storage moet eigenlijk met useswr
 
 vragen aan lector:
 moet er een register page zijn
