@@ -1,5 +1,5 @@
 import { Review, } from '@/types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewService from '@/services/ReviewService';
 
 type Props = {
@@ -8,6 +8,15 @@ type Props = {
 };
 
 const ReviewOverview: React.FC<Props> = ({ reviews, onDeleteReview }: Props) => {
+  const [loggedInUserRole, setLoggedInUserRole] = useState<string>('');
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserRole(userString.role)
+      }
+    }, []);
+
   return (
     <>
       {reviews && (
@@ -30,11 +39,11 @@ const ReviewOverview: React.FC<Props> = ({ reviews, onDeleteReview }: Props) => 
                   <td>{review.stars}</td>
                   <td>{review.description}</td>
                   <td>{review.reviewerId}</td>
-                  <td>
+                  {loggedInUserRole !== 'normal' &&  <td>
                       <button  onClick={() => onDeleteReview(review)}>
                       <p>Delete</p>
                       </button>
-                    </td>
+                    </td>}
                 </tr>
             ))
           ) : (
