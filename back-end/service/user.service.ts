@@ -96,4 +96,4 @@ const updateUserBlacklist = async ({
 }
 
 
-export default { getAllUsers, createUser, getUserById, updateUserBlacklist, authenticate };
+export default { getAllUsers, createUser, getUserByName, getUserById, updateUserBlacklist, authenticate };

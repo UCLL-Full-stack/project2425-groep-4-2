@@ -8,15 +8,18 @@ import { ReviewInput } from '../../types';
 let mockReviewDbGetAllReviews: jest.Mock;
 let mockReviewDbCreateReview: jest.Mock;
 let mockGameDbGetGameById: jest.Mock;
+let mockReviewDeleteReviewById: jest.Mock;
 
 beforeEach(() => {
     mockReviewDbGetAllReviews = jest.fn();
     mockReviewDbCreateReview = jest.fn();
     mockGameDbGetGameById = jest.fn();
+    mockReviewDeleteReviewById = jest.fn();
     
     reviewDb.getAllReviews = mockReviewDbGetAllReviews;
     reviewDb.createReview = mockReviewDbCreateReview;
     gameDb.getGameById = mockGameDbGetGameById;
+    reviewDb.deleteReviewById = mockReviewDeleteReviewById;
 });
 
 afterEach(() => {
@@ -100,3 +103,19 @@ test('given a valid review input, when creating a review, then review is created
 });
 
 
+test('should delete the review when a valid reviewId is provided', async () => {
+    const reviewId = 1;
+
+    mockReviewDeleteReviewById.mockResolvedValue(undefined);
+
+    await reviewService.deleteReviewById(reviewId);
+
+    expect(mockReviewDeleteReviewById).toHaveBeenCalledWith({ id: reviewId });
+    expect(mockReviewDeleteReviewById).toHaveBeenCalledTimes(1);
+});
+
+test('should throw an error if reviewId is undefined', async () => {
+    await expect(reviewService.deleteReviewById()).rejects.toThrow('No user found');
+
+    expect(mockReviewDeleteReviewById).not.toHaveBeenCalled();
+});
