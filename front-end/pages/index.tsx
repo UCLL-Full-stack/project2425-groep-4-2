@@ -31,29 +31,39 @@ const Home: React.FC = () => {
             </tr>
           </thead>
           <tbody>
+            <tr>
               <td>admin</td>
               <td>admin123</td>
               <td>admin</td>
+            </tr>
           </tbody>
           <tbody>
+            <tr>
               <td>Kevin</td>
               <td>kevin123</td>
               <td>Reviewer</td>
+            </tr>
           </tbody>
           <tbody>
+            <tr>
               <td>Harry</td>
               <td>harry123</td>
               <td>Normal</td>
+            </tr>
           </tbody>
           <tbody>
+            <tr>
               <td>reviewer</td>
               <td>reviewer123</td>
               <td>Reviewer</td>
+            </tr>
           </tbody>
           <tbody>
+            <tr>
               <td>normal</td>
               <td>normal123</td>
               <td>Normal</td>
+            </tr>
           </tbody>
         </table>
 
