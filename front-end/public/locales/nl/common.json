@@ -13,7 +13,8 @@
             "reviews": "Reviews",
             "login": "Aanmelden",
             "logout": "Afmelden",
-            "language": "Taal"
+            "language": "Taal",
+            "welcome": "Welkom"
         }
     },
     "consoles": {

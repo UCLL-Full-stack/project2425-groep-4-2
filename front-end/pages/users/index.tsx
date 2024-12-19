@@ -2,8 +2,10 @@ import Header from "@/components/header";
 import UserOverview from "@/components/users/UserOverview";
 import UserService from "@/services/UserService";
 import { User } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Users: React.FC = () => {
     const [users, setUsers] = useState<Array <User>>([]) ;
@@ -66,5 +68,15 @@ const Users: React.FC = () => {
             </main>
         </>
     );
+};
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+  const { locale } = context;
+
+  return {
+      props: {
+          ...(await serverSideTranslations(locale ?? "en", ["common"])),
+      },
+  };
 };
 export default Users;

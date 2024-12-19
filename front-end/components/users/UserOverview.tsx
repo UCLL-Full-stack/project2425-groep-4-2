@@ -27,14 +27,14 @@ const UserOverview: React.FC<Props> = ({ users, onBlacklistUser }: Props) => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>
+                {user.role?.trim().toLowerCase() !== 'admin' && (<td>
                   <button
                         className="hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
                         onClick={() => onBlacklistUser(user)}
                       >
                         {user.blacklisted ? "Whitelist" : "Blacklist"}
                   </button>
-                </td>
+                </td>)}
               </tr>
             ))}
           </tbody>

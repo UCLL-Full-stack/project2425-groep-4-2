@@ -13,7 +13,8 @@
             "reviews": "Reviews",
             "login": "Login",
             "logout": "Logout",
-            "language": "Language"
+            "language": "Language",
+            "welcome": "Welcome"
         }
     },
     "consoles": {

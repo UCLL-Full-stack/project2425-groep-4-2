@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import AddReview from "@/components/reviews/AddReview";
 import GameService from "@/services/GameService";
 import { Game } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
@@ -104,6 +105,16 @@ const Games: React.FC = () => {
             </main>
         </>
     );
+};
+
+export const getServerSideProps = async (context: { locale: any; }) => {
+  const { locale } = context;
+
+  return {
+      props: {
+          ...(await serverSideTranslations(locale ?? "en", ["common"])),
+      },
+  };
 };
 
 export default Games;
