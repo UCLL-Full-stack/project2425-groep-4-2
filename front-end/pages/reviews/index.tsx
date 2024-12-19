@@ -21,7 +21,15 @@ const Reviews: React.FC = () => {
       return allReviews;
     };
     */
-    
+
+    const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserBlacklisted(userString.blacklisted)
+      }
+    }, []);
 
     const getReviews = async () => {
         const response = await ReviewService.getAllReviews();
@@ -61,8 +69,9 @@ const Reviews: React.FC = () => {
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
                     {
-                    !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
+                    !loggedInUserBlacklisted && !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
+                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
                 </section>
             </main>
         </>

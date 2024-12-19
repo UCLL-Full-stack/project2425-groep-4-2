@@ -45,6 +45,16 @@ const Consoles: React.FC = () => {
         getConsoles();
     }, []);
 
+    const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserBlacklisted(userString.blacklisted)
+      }
+    }, []);
+
+
     return (
         <>
             <Head>
@@ -65,8 +75,9 @@ const Consoles: React.FC = () => {
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
                     {
-                    !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
+                    !loggedInUserBlacklisted && !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
                     }
+                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
                 </section>
                 {isFormOpen && (
           <AddConsole

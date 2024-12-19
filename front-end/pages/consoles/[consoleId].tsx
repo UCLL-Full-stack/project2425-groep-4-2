@@ -25,6 +25,15 @@ const ReadConsoleById = () => {
         }
     )
 
+    const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserBlacklisted(userString.blacklisted)
+      }
+    }, []);
+
     return (
         <>
             <Head>
@@ -34,7 +43,7 @@ const ReadConsoleById = () => {
             <main className="p-6 min-h-screen flex flex-col items-center">
                 <h1>Games for console {console?.name + " "}{console?.version}</h1>
                 <section className="w-50">
-                {console && (
+                {!loggedInUserBlacklisted && console && (
         <table className="table table-hover">
           <thead>
             <tr>
@@ -68,6 +77,7 @@ const ReadConsoleById = () => {
           </tbody>
         </table>
       )}
+      {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
                 </section>
             </main>
         </>

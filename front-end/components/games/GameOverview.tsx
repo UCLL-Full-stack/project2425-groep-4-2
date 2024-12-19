@@ -1,5 +1,5 @@
 import { Game } from '@/types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 //import AddGame from './AddGame';
 import GameService from '@/services/GameService';
 
@@ -10,6 +10,15 @@ type Props = {
 };
 
 const GameOverview: React.FC<Props> = ({ games, onDeleteGame, onAddReview }: Props) => {
+  const [loggedInUserRole, setLoggedInUserRole] = useState<string>('');
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserRole(userString.role)
+      }
+    }, []);
+
   return (
     <>
       {games && (
@@ -41,7 +50,7 @@ const GameOverview: React.FC<Props> = ({ games, onDeleteGame, onAddReview }: Pro
                     >
                       <p>Delete</p>
                     </td>
-                    <td>
+                    {loggedInUserRole !== 'normal' && <td>
                     <button
                     className="mt-6 rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
                     onClick={() => onAddReview(game)}
@@ -50,7 +59,7 @@ const GameOverview: React.FC<Props> = ({ games, onDeleteGame, onAddReview }: Pro
             className="text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300"
           >Add Review</span>
         </button>
-                    </td>
+                    </td>}
                 </tr>
             ))
           ) : (

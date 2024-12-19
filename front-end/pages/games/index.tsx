@@ -54,6 +54,15 @@ const Games: React.FC = () => {
         getGames();
     }, []);
 
+    const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+  
+    useEffect(() => {
+      const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+      if(userString){
+        setLoggedInUserBlacklisted(userString.blacklisted)
+      }
+    }, []);
+
     return (
         <>
             <Head>
@@ -74,8 +83,9 @@ const Games: React.FC = () => {
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
                     {
-                    !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />
+                    !loggedInUserBlacklisted && !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />
                     }
+                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
                 </section>
                 {isFormOpen && (
           <AddGame

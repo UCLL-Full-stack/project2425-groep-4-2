@@ -11,11 +11,13 @@ const Users: React.FC = () => {
     const [roleError, setRoleError] = useState<string>("You don't have the privileges to acces this page.");
 
     const [loggedInUserRole, setLoggedInUserRole] = useState<String | null>(null);
+    const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
     useEffect(() => {
       const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
       if(userString){
         setLoggedInUserRole(userString.role);
+        setLoggedInUserBlacklisted(userString.blacklisted)
       }
     }, []);
 
@@ -59,6 +61,7 @@ const Users: React.FC = () => {
                     loggedInUserRole === 'admin' && !error && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
                     {loggedInUserRole !== 'admin' && <div className="text-red-800">{roleError}</div>}
+                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
                 </section>
             </main>
         </>
