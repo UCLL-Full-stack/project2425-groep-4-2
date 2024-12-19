@@ -16,6 +16,8 @@ const Users: React.FC = () => {
 
     const [loggedInUserRole, setLoggedInUserRole] = useState<String | null>(null);
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+
+    const { t } = useTranslation();
   
     useEffect(() => {
       const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
@@ -71,7 +73,7 @@ const Users: React.FC = () => {
                     loggedInUserRole === 'admin' && !statusError && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
                     {loggedInUserRole !== 'admin' && <div className="text-red-800">{roleError}</div>}
-                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+                    {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
                 </section>
             </main>
         </>

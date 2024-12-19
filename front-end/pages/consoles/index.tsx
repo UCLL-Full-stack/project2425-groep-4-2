@@ -85,7 +85,7 @@ const Consoles: React.FC = () => {
                     {
                     !loggedInUserBlacklisted && !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
                     }
-                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+                    {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
                 </section>
                 {isFormOpen && (
           <AddConsole

@@ -6,6 +6,7 @@
     "app.name": "Name",
     "app.password": "Password",
     "app.role": "Role",
+    "app.blacklisted": "You have been blacklisted, please contact the admin.",
     "header": {
         "title": "The GameLib",
         "nav": {

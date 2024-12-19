@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import useSWR, { mutate } from "swr";
 import useInterval from "use-interval";
+import { useTranslation } from "react-i18next";
 
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
@@ -24,6 +25,8 @@ const Reviews: React.FC = () => {
       return allReviews;
     };
     */
+
+    const { t } = useTranslation();
 
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
@@ -86,7 +89,7 @@ const Reviews: React.FC = () => {
                     {
                     !loggedInUserBlacklisted && !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
-                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+                    {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
                 </section>
             </main>
         </>
