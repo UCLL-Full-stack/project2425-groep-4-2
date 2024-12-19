@@ -3,16 +3,8 @@ userstories:
 toevoegen van i18n userstory/s
 ? toevoegen security userstory/s ?
 blacklist userstory is anders geimplementeerd dan de userstory zegt
+delete stories van games en consoles doen verdwijnen buiten als we zin hebben om die te fixxen
 
 project:
-? alle missende testen domein en service ?
 2 frontend testen
-? formulieren popup zie werkplek project?
 ? reviewerId in ReviewOverview moet mischien de username van de reviewer worden ?
-? userid in addconsole zou moeten de user zijn die het gebruikt ?
-? games zouden mischien een colomn moeten hebben van de consoles(ook aanwezig in add games) ?
-? id's in add forms verwijderen (auto asign) ?
-alles wat met useeffect is gedaan buiten inlezen van local en sesion storage moet eigenlijk met useswr
-
-vragen aan lector:
-moet er een register page zijn
