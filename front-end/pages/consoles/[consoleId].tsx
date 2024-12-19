@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Head from "next/head";
 import Header from "@/components/header";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Console } from "@/types";
 import ConsoleService from "@/services/ConsoleService";
 import GameOverview from "@/components/games/GameOverview";
+import useInterval from "use-interval";
 
 const ReadConsoleById = () => {
     const [console, setConsole] = useState<Console | undefined>(undefined);
@@ -20,10 +21,16 @@ const ReadConsoleById = () => {
         setConsole(console);
     }
 
-    useEffect( () => {
-            if(consoleId)getConsoleById();
-        }
-    )
+    const { data, isLoading, error } = useSWR(
+      "consoleId",
+      getConsoleById,
+  );
+  
+
+  useInterval(() => {
+    mutate("consoleId", getConsoleById);
+}, 1000);
+
 
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
@@ -78,6 +85,7 @@ const ReadConsoleById = () => {
         </table>
       )}
       {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+      {error && <div className="text-red-800">{error}</div>}
                 </section>
             </main>
         </>

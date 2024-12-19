@@ -52,9 +52,26 @@ const createReview = async (review: Review): Promise<Review> => {
     }
 };
 
+const deleteReviewById = async ({ id }: { id: number }): Promise<Review | null> => {
+    try {
+        const reviewPrisma = await database.review.delete({
+            where: { id },
+            include: {game: true},
+        });
+
+        if (!reviewPrisma) { return null; }
+
+        return Review.from(reviewPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 
 export default {
     getAllReviews,
     getReviewById,
     createReview,
+    deleteReviewById,
 };

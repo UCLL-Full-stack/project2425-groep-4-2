@@ -6,10 +6,12 @@ import { Review, ReviewData, } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
-    const [error, setError] = useState<string>();
+    const [statusError, setStatusError] = useState<string>();
 
     /*
     const extractAllReviews = (data: ReviewData[]): Review[] => {
@@ -37,10 +39,10 @@ const Reviews: React.FC = () => {
         const json = await response.json();
         if(!response.ok){
           if(response.status === 401){
-              setError("You are not authorized for this page. Please login first.");
+            setStatusError("You are not authorized for this page. Please login first.");
           }
           else{
-              setError(response.statusText);
+            setStatusError(response.statusText);
           }
       }
         //const allReviews = extractAllReviews(json);
@@ -48,11 +50,22 @@ const Reviews: React.FC = () => {
     };
 
     const handleDeleteReview = async (review: Review) => {
-        if (review.id) {
-            await ReviewService.deleteReview(review.id);
-            getReviews();
-        }
+        if(confirm("Are you sure to delete " + review.game?.name)) {
+            if (review.id) {
+                await ReviewService.deleteReview(review);
+                getReviews();
+            }
+          }
     }
+
+    const { data, isLoading, error } = useSWR(
+      "reviews",
+      getReviews,
+  );
+
+  useInterval(() => {
+    mutate("reviews", getReviews());
+}, 1000);
 
     useEffect(() => {
         getReviews();
@@ -69,6 +82,8 @@ const Reviews: React.FC = () => {
                 <h2>Reviews overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }

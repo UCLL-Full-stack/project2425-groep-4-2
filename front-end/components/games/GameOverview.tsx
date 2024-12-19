@@ -45,12 +45,7 @@ const GameOverview: React.FC<Props> = ({ games, onDeleteGame, onAddReview }: Pro
                     ? new Date(game.releaseDate).toLocaleDateString('en-GB') 
                     : "N/A"}
                   </td>
-                  <td
-                      onClick={() => onDeleteGame(game)}
-                    >
-                      <p>Delete</p>
-                    </td>
-                    {loggedInUserRole !== 'normal' && <td>
+                    {loggedInUserRole === 'reviewer' && <td>
                     <button
                     className="mt-6 rounded-lg relative w-36 h-10 cursor-pointer flex items-center border border-green-500 bg-green-500 group hover:bg-green-500 active:bg-green-500 active:border-green-500"
                     onClick={() => onAddReview(game)}

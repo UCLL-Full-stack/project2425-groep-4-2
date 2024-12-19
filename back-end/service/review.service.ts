@@ -24,6 +24,12 @@ const getReviewByGameName = async ({ gameName }: { gameName: string }): Promise<
 };
 */
 
+const deleteReviewById = async (reviewId?: number) => {
+    let id = reviewId;
+    if(!id)throw new Error(`No user found`);
+    await reviewDb.deleteReviewById({id});
+}
+
 const createReview = async ({
     stars,
     description,
@@ -46,4 +52,4 @@ const createReview = async ({
     return await reviewDb.createReview(review);
 };
 
-export default { getAllReviews, createReview, };
+export default { getAllReviews, createReview, deleteReviewById, };

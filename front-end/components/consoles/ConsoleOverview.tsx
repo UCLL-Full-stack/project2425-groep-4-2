@@ -5,6 +5,8 @@ import ConsoleService from '@/services/ConsoleService';
 import Language from "@/components/language/Language";
 import { useTranslation } from "next-i18next";
 import GameService from '@/services/GameService';
+import useSWR, { mutate } from 'swr';
+import useInterval from 'use-interval';
 
 type Props = {
   consoles: Array<Console>;
@@ -14,21 +16,22 @@ type Props = {
 const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) => {
   const [selectedConsole, setSelectedConsole] = useState<Console>();
   const [showGames, setShowGames] = useState(false);
-  const [error, setError] = useState<string>();
+  const [statusError, setStatusError] = useState<string>();
   const [games, setGames] = useState<Array <Game>>([]) ;
 
   const getGames = async () => {
     const response = await GameService.getAllGames();
     if(!response.ok){
         if(response.status === 401){
-            setError("You are not authorized for this page. Please login first.");
+          setStatusError("You are not authorized for this page. Please login first.");
         }
         else{
-            setError(response.statusText);
+          setStatusError(response.statusText);
         }
     }
     const json = await response.json();
     setGames(json);
+    return json;
 };
 
   const handleAddGame = async (gameId?: number) =>{
@@ -45,9 +48,15 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
     setShowGames(true);
   }
 
-  useEffect(() => {
-          getGames();
-      }, []);
+  const { data, isLoading, error } = useSWR(
+    "games",
+    getGames
+);
+
+  useInterval(() => {
+      mutate("games", getGames());
+  }, 1000);
+  
 
   const { t } = useTranslation();
   return (
@@ -78,11 +87,6 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                     ? new Date(console.releaseDate).toLocaleDateString('en-GB') 
                     : "N/A"}
                   </td>
-                  <td
-                      onClick={() => onDeleteConsole(console)}
-                    >
-                      <p>{t("consoles.table.delete")}</p>
-                    </td>
                     <td className='text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300'>
                     <a href={`/consoles/${console.id}`} >View games for console</a>
                     </td>
@@ -93,6 +97,7 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
               <td colSpan={6}>{t("consoles.table.text")}</td>
             </tr>
           )}
+          
           {
             showGames && (
               <table className="table table-hover">
@@ -142,6 +147,8 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
           </tbody>
         </table>
       )}
+      {statusError}
+      {error && <div className="text-red-800">{error}</div>}
     </>
   );
 };
