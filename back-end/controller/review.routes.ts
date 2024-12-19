@@ -92,4 +92,16 @@ reviewRouter.post('/', (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
+reviewRouter.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
+    try{
+        console.log("Yes it reaches");
+        const review = <ReviewInput>req.body;
+        console.log(review);
+        const result = reviewService.deleteReviewById(review.id);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({status: 'error', errorMessage: error});
+    }
+});
+
 export { reviewRouter };

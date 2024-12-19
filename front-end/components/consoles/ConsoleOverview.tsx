@@ -78,11 +78,6 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                     ? new Date(console.releaseDate).toLocaleDateString('en-GB') 
                     : "N/A"}
                   </td>
-                  <td
-                      onClick={() => onDeleteConsole(console)}
-                    >
-                      <p>{t("consoles.table.delete")}</p>
-                    </td>
                     <td className='text-black font-semibold ml-8 transform group-hover:translate-x-20 transition-all duration-300'>
                     <a href={`/consoles/${console.id}`} >View games for console</a>
                     </td>

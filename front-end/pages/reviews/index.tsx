@@ -48,10 +48,12 @@ const Reviews: React.FC = () => {
     };
 
     const handleDeleteReview = async (review: Review) => {
-        if (review.id) {
-            await ReviewService.deleteReview(review.id);
-            getReviews();
-        }
+        if(confirm("Are you sure to delete " + review.game?.name)) {
+            if (review.id) {
+                await ReviewService.deleteReview(review);
+                getReviews();
+            }
+          }
     }
 
     useEffect(() => {

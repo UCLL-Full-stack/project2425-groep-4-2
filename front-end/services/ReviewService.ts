@@ -23,13 +23,16 @@ const addReview = async (review: Review) => {
     })
 }
 
-const deleteReview = async (reviewId: number) => {
+const deleteReview = async (review: Review) => {
+  const token = JSON.parse(localStorage.getItem('loggedInUser') || '{}')?.token;
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
-  return fetch(`${apiUrl}/reviews/${reviewId}`, {
+  return fetch(`${apiUrl}/reviews/${review.id}`, {
       method: "DELETE",
       headers: {
           'Content-Type': 'application/json',
-      }
+          Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(review)
   });
 };
 

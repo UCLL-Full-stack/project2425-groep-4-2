@@ -30,10 +30,10 @@ const ReviewOverview: React.FC<Props> = ({ reviews, onDeleteReview }: Props) => 
                   <td>{review.stars}</td>
                   <td>{review.description}</td>
                   <td>{review.reviewerId}</td>
-                  <td
-                      onClick={() => onDeleteReview(review)}
-                    >
+                  <td>
+                      <button  onClick={() => onDeleteReview(review)}>
                       <p>Delete</p>
+                      </button>
                     </td>
                 </tr>
             ))
