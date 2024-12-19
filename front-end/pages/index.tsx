@@ -25,9 +25,9 @@ const Home: React.FC = () => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Password</th>
-              <th scope="col">Role</th>
+              <th scope="col">{t("app.name")}</th>
+              <th scope="col">{t("app.password")}</th>
+              <th scope="col">{t("app.role")}</th>
             </tr>
           </thead>
           <tbody>
