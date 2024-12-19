@@ -2,7 +2,10 @@
     "language": "Taal",
     "app.title": "De GameLib",
     "app.welcome": "Welkom!",
-    "app.text": "een bibliotheek om bij te houden welke spelcomputers en games dat jij bezit.",
+    "app.text": "Een bibliotheek om bij te houden welke spelcomputers en games dat jij bezit.",
+    "app.name": "Naam",
+    "app.password": "Wachtwoord",
+    "app.role": "Rol",
     "header": {
         "title": "De GameLib",
         "nav": {

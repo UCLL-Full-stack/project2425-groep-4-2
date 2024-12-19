@@ -51,7 +51,7 @@ const Header: React.FC = () => {
         )}
         {loggedInUser && (
           <a
-            href="/login"
+            href="/"
             onClick={handleClick}
             className="nav-link px-4 fs-5 text-white"
           >
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
         )}
         {loggedInUser && (
           <div className="nav-link px-4 fs-5 text-white">
-            {t('header.welcome')}, {loggedInUser}!
+            {t('header.nav.welcome')}, {loggedInUser}!
           </div>
         )}
         {

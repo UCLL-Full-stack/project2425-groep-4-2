@@ -3,6 +3,9 @@
     "app.title": "The GameLib",
     "app.welcome": "Welcome!",
     "app.text": "A library to keep track of the consoles and games that you own.",
+    "app.name": "Name",
+    "app.password": "Password",
+    "app.role": "Role",
     "header": {
         "title": "The GameLib",
         "nav": {
