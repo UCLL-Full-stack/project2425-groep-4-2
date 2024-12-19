@@ -8,21 +8,22 @@ import { useEffect, useState } from "react";
 import Language from "@/components/language/Language";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import useSWR from "swr";
 
 const Consoles: React.FC = () => {
     const [consoles, setConsoles] = useState<Array <Console>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [error, setError] = useState<string>();
+    const [statusError, setStatusError] = useState<string>();
     const { t } = useTranslation();
 
     const getConsoles = async () => {
         const response = await ConsoleService.getAllConsoles();
         if(!response.ok){
             if(response.status === 401){
-                setError("You are not authorized for this page. Please login first.");
+                setStatusError("You are not authorized for this page. Please login first.");
             }
             else{
-                setError(response.statusText);
+                setStatusError(response.statusText);
             }
         }
         const json = await response.json();
@@ -41,9 +42,10 @@ const Consoles: React.FC = () => {
         }
     }
 
-    useEffect(() => {
-        getConsoles();
-    }, []);
+    const { data, isLoading, error } = useSWR(
+        "consoles",
+        getConsoles,
+    );
 
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
@@ -74,6 +76,8 @@ const Consoles: React.FC = () => {
                 <h2>{t("consoles.h2")}</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
+                {isLoading && <p className="text-green-800">Loading...</p>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />
                     }

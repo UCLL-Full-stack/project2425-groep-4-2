@@ -6,10 +6,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import useSWR from "swr";
 
 const Users: React.FC = () => {
     const [users, setUsers] = useState<Array <User>>([]) ;
-    const [error, setError] = useState<string>();
+    const [statusError, setStatusError] = useState<string>();
     const [roleError, setRoleError] = useState<string>("You don't have the privileges to acces this page.");
 
     const [loggedInUserRole, setLoggedInUserRole] = useState<String | null>(null);
@@ -27,10 +28,10 @@ const Users: React.FC = () => {
         const response = await UserService.getAllUsers();
         if(!response.ok){
             if(response.status === 401){
-                setError("You are not authorized for this page. Please login first.");
+                setStatusError("You are not authorized for this page. Please login first.");
             }
             else{
-                setError(response.statusText);
+                setStatusError(response.statusText);
             }
         }
         const json = await response.json();
@@ -43,6 +44,11 @@ const Users: React.FC = () => {
         await UserService.updateBlacklistStatus(toUpdateUser); 
         getUsers();
     };
+
+    const { data, isLoading, error } = useSWR(
+        "users",
+        getUsers,
+    );
 
     useEffect(() => {
         getUsers();
@@ -58,9 +64,11 @@ const Users: React.FC = () => {
                 <h1>Users</h1>
                 <h2>Users overview</h2>
                 <section>
-                    {error && <div className="text-red-800">{error}</div>}
+                {error && <div className="text-red-800">{error}</div>}
+                {isLoading && <p className="text-green-800">Loading...</p>}
+                    {statusError && <div className="text-red-800">{statusError}</div>}
                     {
-                    loggedInUserRole === 'admin' && !error && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
+                    loggedInUserRole === 'admin' && !statusError && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />
                     }
                     {loggedInUserRole !== 'admin' && <div className="text-red-800">{roleError}</div>}
                     {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}

@@ -8,11 +8,12 @@ import { Game } from "@/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const Games: React.FC = () => {
     const [games, setGames] = useState<Array <Game>>([]) ;
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [error, setError] = useState<string>();
+    const [statusError, setStatusError] = useState<string>();
     const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
     const [selectedGame, setSelectedGame] = useState<Game>();
 
@@ -20,10 +21,10 @@ const Games: React.FC = () => {
         const response = await GameService.getAllGames();
         if(!response.ok){
             if(response.status === 401){
-                setError("You are not authorized for this page. Please login first.");
+                setStatusError("You are not authorized for this page. Please login first.");
             }
             else{
-                setError(response.statusText);
+                setStatusError(response.statusText);
             }
         }
         const json = await response.json();
@@ -51,9 +52,10 @@ const Games: React.FC = () => {
         
     }
 
-    useEffect(() => {
-        getGames();
-    }, []);
+    const { data, isLoading, error } = useSWR(
+        "games",
+        getGames,
+    );
 
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
@@ -83,6 +85,8 @@ const Games: React.FC = () => {
                 <h2>Games overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
+                {isLoading && <p className="text-green-800">Loading...</p>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />
                     }

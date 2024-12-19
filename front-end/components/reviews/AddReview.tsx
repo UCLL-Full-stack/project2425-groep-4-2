@@ -13,13 +13,6 @@ type Props = {
 const AddReview: React.FC<Props> = ({toggleForm, onAddReview, game}) => {
   const [stars, setStars] = useState<number>(1)
   const [description, setDescription] = useState('')
-  const [gameId, setGameId] = useState<number | undefined>(undefined)
-
-  useEffect(() => {
-    if (game && game.id) {
-      setGameId(game.id);
-    }
-  }, [game]);
 
   const handleAddReview = async () => {
     if (!stars) {
@@ -28,7 +21,7 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview, game}) => {
     if (!description) {
       alert("description is required")
     }
-    if (!gameId) {
+    if (!game?.id) {
       alert("Game id is required")
     }
 
@@ -42,7 +35,7 @@ const AddReview: React.FC<Props> = ({toggleForm, onAddReview, game}) => {
       const newReview: Review = {
         stars,
         description,
-        gameId: gameId ?? 0,
+        gameId: game?.id ?? 0,
         reviewerId: loggedInReviewerId,
       }
       await ReviewService.addReview(newReview);

@@ -6,10 +6,11 @@ import { Review, ReviewData, } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import useSWR from "swr";
 
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
-    const [error, setError] = useState<string>();
+    const [statusError, setStatusError] = useState<string>();
 
     /*
     const extractAllReviews = (data: ReviewData[]): Review[] => {
@@ -37,10 +38,10 @@ const Reviews: React.FC = () => {
         const json = await response.json();
         if(!response.ok){
           if(response.status === 401){
-              setError("You are not authorized for this page. Please login first.");
+            setStatusError("You are not authorized for this page. Please login first.");
           }
           else{
-              setError(response.statusText);
+            setStatusError(response.statusText);
           }
       }
         //const allReviews = extractAllReviews(json);
@@ -55,6 +56,11 @@ const Reviews: React.FC = () => {
             }
           }
     }
+
+    const { data, isLoading, error } = useSWR(
+      "reviews",
+      getReviews,
+  );
 
     useEffect(() => {
         getReviews();
@@ -71,6 +77,9 @@ const Reviews: React.FC = () => {
                 <h2>Reviews overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
+                {isLoading && <p className="text-green-800">Loading...</p>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
+                {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && reviews && <ReviewOverview reviews={reviews} onDeleteReview={handleDeleteReview} />
                     }
