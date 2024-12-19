@@ -47,7 +47,7 @@ const ReadConsoleById = () => {
                 <title>Console</title>
             </Head>
             <Header />
-            <main className="p-6 min-h-screen flex flex-col items-center">
+            <main className="d-flex flex-column justify-content-center align-items-center">
                 <h1>Games for console {console?.name + " "}{console?.version}</h1>
                 <section className="w-50">
                 {!loggedInUserBlacklisted && console && (

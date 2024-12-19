@@ -97,8 +97,10 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
               <td colSpan={6}>{t("consoles.table.text")}</td>
             </tr>
           )}
-          
-          {
+          </tbody>
+        </table>
+      )}
+      {
             showGames && (
               <table className="table table-hover">
                 <thead>
@@ -144,9 +146,6 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
               </table>
             )
           }
-          </tbody>
-        </table>
-      )}
       {statusError}
       {error && <div className="text-red-800">{error}</div>}
     </>
