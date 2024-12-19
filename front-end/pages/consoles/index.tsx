@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import Language from "@/components/language/Language";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Consoles: React.FC = () => {
     const [consoles, setConsoles] = useState<Array <Console>>([]) ;
@@ -47,6 +48,10 @@ const Consoles: React.FC = () => {
         getConsoles,
     );
 
+    useInterval(() => {
+        mutate("consoles", getConsoles());
+    }, 1000);
+
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
     useEffect(() => {
@@ -76,7 +81,6 @@ const Consoles: React.FC = () => {
                 <h2>{t("consoles.h2")}</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
-                {isLoading && <p className="text-green-800">Loading...</p>}
                 {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && consoles && <ConsoleOverview consoles={consoles} onDeleteConsole={handleDeleteConsole} />

@@ -6,7 +6,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Users: React.FC = () => {
     const [users, setUsers] = useState<Array <User>>([]) ;
@@ -50,9 +51,9 @@ const Users: React.FC = () => {
         getUsers,
     );
 
-    useEffect(() => {
-        getUsers();
-    }, []);
+    useInterval(() => {
+        mutate("users", getUsers());
+    }, 1000);
 
     return (
         <>
@@ -65,7 +66,6 @@ const Users: React.FC = () => {
                 <h2>Users overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
-                {isLoading && <p className="text-green-800">Loading...</p>}
                     {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     loggedInUserRole === 'admin' && !statusError && users && <UserOverview users={users} onBlacklistUser={handleBlacklist} />

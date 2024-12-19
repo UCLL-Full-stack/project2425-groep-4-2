@@ -26,11 +26,11 @@ const ReadConsoleById = () => {
       getConsoleById,
   );
   
-/*
+
   useInterval(() => {
-    mutate("consoleId", getConsoleById());
+    mutate("consoleId", getConsoleById);
 }, 1000);
-*/
+
 
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
@@ -62,8 +62,6 @@ const ReadConsoleById = () => {
             </tr>
           </thead>
           <tbody>
-          {error && <div className="text-red-800">{error}</div>}
-          {isLoading && <p className="text-green-800">Loading...</p>}
             {console.games.length > 0 ? (
               console.games.map((game, index) => (
                 <tr key={index}>
@@ -87,6 +85,7 @@ const ReadConsoleById = () => {
         </table>
       )}
       {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+      {error && <div className="text-red-800">{error}</div>}
                 </section>
             </main>
         </>

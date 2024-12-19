@@ -8,7 +8,8 @@ import { Game } from "@/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Games: React.FC = () => {
     const [games, setGames] = useState<Array <Game>>([]) ;
@@ -57,6 +58,10 @@ const Games: React.FC = () => {
         getGames,
     );
 
+    useInterval(() => {
+        mutate("games", getGames);
+    }, 1000);
+
     const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
   
     useEffect(() => {
@@ -85,7 +90,6 @@ const Games: React.FC = () => {
                 <h2>Games overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
-                {isLoading && <p className="text-green-800">Loading...</p>}
                 {statusError && <div className="text-red-800">{statusError}</div>}
                     {
                     !loggedInUserBlacklisted && !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />

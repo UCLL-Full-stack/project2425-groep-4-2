@@ -6,7 +6,8 @@ import { Review, ReviewData, } from "@/types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
+import useInterval from "use-interval";
 
 const Reviews: React.FC = () => {
     const [reviews, setReviews] = useState<Array <Review>>([]) ;
@@ -62,6 +63,10 @@ const Reviews: React.FC = () => {
       getReviews,
   );
 
+  useInterval(() => {
+    mutate("reviews", getReviews());
+}, 1000);
+
     useEffect(() => {
         getReviews();
     }, []);
@@ -77,7 +82,6 @@ const Reviews: React.FC = () => {
                 <h2>Reviews overview</h2>
                 <section>
                 {error && <div className="text-red-800">{error}</div>}
-                {isLoading && <p className="text-green-800">Loading...</p>}
                 {statusError && <div className="text-red-800">{statusError}</div>}
                 {statusError && <div className="text-red-800">{statusError}</div>}
                     {

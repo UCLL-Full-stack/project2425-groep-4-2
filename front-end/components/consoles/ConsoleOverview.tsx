@@ -52,11 +52,11 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
     "games",
     getGames
 );
-/*
+
   useInterval(() => {
       mutate("games", getGames());
   }, 1000);
-  */
+  
 
   const { t } = useTranslation();
   return (
@@ -97,8 +97,7 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
               <td colSpan={6}>{t("consoles.table.text")}</td>
             </tr>
           )}
-          {error && <div className="text-red-800">{error}</div>}
-          {isLoading && <p className="text-green-800">Loading...</p>}
+          
           {
             showGames && (
               <table className="table table-hover">
@@ -112,8 +111,8 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
                   </tr>
                 </thead>
                 <tbody>
-                  {data.games.length > 0 ? (
-                    data.games.map((game, index) => (
+                  {games.length > 0 ? (
+                    games.map((game, index) => (
                       <tr key={index}>
                         <td>{game.id}</td>
                         <td>{game.name}</td>
@@ -149,6 +148,7 @@ const ConsoleOverview: React.FC<Props> = ({ consoles, onDeleteConsole }: Props) 
         </table>
       )}
       {statusError}
+      {error && <div className="text-red-800">{error}</div>}
     </>
   );
 };
