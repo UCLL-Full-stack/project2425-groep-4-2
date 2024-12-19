@@ -1,17 +1,17 @@
 userstories:
-userstories herbekijken of er nog dingen missen
+? userstories herbekijken of er nog dingen missen ?
 toevoegen van i18n userstory/s
-toevoegen security userstory/s
+? toevoegen security userstory/s ?
 blacklist userstory is anders geimplementeerd dan de userstory zegt
 
 project:
-alle testen domein en service
+? alle missende testen domein en service ?
 2 frontend testen
-formulieren achter een knop plaatsen (fix consoles?)
-reviewerId in ReviewOverview moet mischien de username van de reviewer worden
-userid in addconsole zou moeten de user zijn die het gebruikt
-games zouden mischien een colomn moeten hebben van de consoles(ook aanwezig in add games)
-id's in add forms verwijderen (auto asign)
+? formulieren popup zie werkplek project?
+? reviewerId in ReviewOverview moet mischien de username van de reviewer worden ?
+? userid in addconsole zou moeten de user zijn die het gebruikt ?
+? games zouden mischien een colomn moeten hebben van de consoles(ook aanwezig in add games) ?
+? id's in add forms verwijderen (auto asign) ?
 
 vragen aan lector:
 moet er een register page zijn
