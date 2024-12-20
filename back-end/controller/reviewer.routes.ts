@@ -7,7 +7,7 @@
  *      scheme: bearer
  *      bearerFormat: JWT
  *    schemas:
- *      Lecturer:
+ *      Reviewer:
  *          type: object
  *          properties:
  *            id:
