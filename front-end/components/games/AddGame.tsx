@@ -77,7 +77,7 @@ const AddGame: React.FC<Props> = ({toggleForm, onAddGame}) => {
         className="bg-blue-500 text-black p-2 rounded-lg"
         onClick={handleAddGame}
       >
-        Add Console
+        Add Game
       </button>
       </div>
         </form>
