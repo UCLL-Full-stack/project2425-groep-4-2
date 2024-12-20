@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
+  const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
 
   useEffect(() => {
     const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
     if(userString){
       setLoggedInUser(userString.name);
+      setLoggedInUserBlacklisted(userString.blacklisted);
     }
   }, []);
 
@@ -29,7 +31,8 @@ const Header: React.FC = () => {
         <Link href="/" className="nav-link px-4 fs-5 text-white">
           {t('header.nav.home')}
         </Link>
-        <Link href="/users" className="nav-link px-4 fs-5 text-white">
+        {!loggedInUserBlacklisted && (
+          <><Link href="/users" className="nav-link px-4 fs-5 text-white">
           {t('header.nav.users')}
         </Link>
         <Link href="/consoles" className="nav-link px-4 fs-5 text-white">
@@ -41,6 +44,7 @@ const Header: React.FC = () => {
         <Link href="/reviews" className="nav-link px-4 fs-5 text-white">
         {t('header.nav.reviews')}
         </Link>
+        </>)}
         {!loggedInUser && (
           <Link
             href="/login"

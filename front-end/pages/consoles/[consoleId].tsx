@@ -8,9 +8,12 @@ import { Console } from "@/types";
 import ConsoleService from "@/services/ConsoleService";
 import GameOverview from "@/components/games/GameOverview";
 import useInterval from "use-interval";
+import { useTranslation } from "react-i18next";
 
 const ReadConsoleById = () => {
     const [console, setConsole] = useState<Console | undefined>(undefined);
+
+    const { t } = useTranslation();
 
     const router = useRouter();
     const {consoleId} = router.query;
@@ -84,7 +87,7 @@ const ReadConsoleById = () => {
           </tbody>
         </table>
       )}
-      {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+      {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
       {error && <div className="text-red-800">{error}</div>}
                 </section>
             </main>

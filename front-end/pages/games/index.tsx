@@ -8,6 +8,7 @@ import { Game } from "@/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import useSWR, { mutate } from "swr";
 import useInterval from "use-interval";
 
@@ -17,6 +18,8 @@ const Games: React.FC = () => {
     const [statusError, setStatusError] = useState<string>();
     const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
     const [selectedGame, setSelectedGame] = useState<Game>();
+
+    const { t } = useTranslation();
 
     const getGames = async () => {
         const response = await GameService.getAllGames();
@@ -94,7 +97,7 @@ const Games: React.FC = () => {
                     {
                     !loggedInUserBlacklisted && !error && games && <GameOverview games={games} onDeleteGame={handleDeleteGame} onAddReview={handleReviewForm} />
                     }
-                    {loggedInUserBlacklisted && <div className="text-red-800">You have been blacklisted. Please contact the admin.</div>}
+                    {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
                 </section>
                 {isFormOpen && (
           <AddGame

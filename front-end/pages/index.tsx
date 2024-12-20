@@ -5,9 +5,20 @@ import Header from '@/components/header';
 import Language from "@/components/language/Language";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useEffect, useState } from 'react';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
+
+  const [loggedInUserBlacklisted, setLoggedInUserBlacklisted] = useState<boolean>(false);
+    
+      useEffect(() => {
+        const userString = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+        if(userString){
+          setLoggedInUserBlacklisted(userString.blacklisted)
+        }
+      }, []);
+
   return (
     <>
       <Head>
@@ -21,6 +32,7 @@ const Home: React.FC = () => {
         <span>
           <h1>{t("app.welcome")}</h1>
         </span>
+        {loggedInUserBlacklisted && <div className="text-red-800">{t("app.blacklisted")}</div>}
 
         <table className="table table-hover">
           <thead>

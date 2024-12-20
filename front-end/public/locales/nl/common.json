@@ -6,6 +6,7 @@
     "app.name": "Naam",
     "app.password": "Wachtwoord",
     "app.role": "Rol",
+    "app.blacklisted": "Je staat op de zwarte lijst, neem contact op met de admin.",
     "header": {
         "title": "De GameLib",
         "nav": {
